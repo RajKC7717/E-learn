@@ -37,4 +37,8 @@ export default defineConfig({
       }
     })
   ],
+  server: {
+    host: true,
+    allowedHosts: ['.ngrok-free.app'], // Allows any ngrok URL
+  },
 })

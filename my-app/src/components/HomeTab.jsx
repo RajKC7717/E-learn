@@ -1,17 +1,16 @@
 import { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next'; // Import translation hook
+import { useTranslation } from 'react-i18next';
 import { useOfflineSearch } from '../hooks/useOfflineSearch';
 import { useVoiceInput } from '../hooks/useVoiceInput';
-import DetailModal from './DetailModal';
-import { addToHistory, getHistory } from '../utils/db'; // Import DB functions
+import LearningMode from './LearningMode'; // <--- CHANGED THIS IMPORT
+import { addToHistory, getHistory } from '../utils/db';
 
 export default function HomeTab() {
-  const { t } = useTranslation(); // Initialize translation
+  const { t } = useTranslation();
   const { query, setQuery, results, isReady } = useOfflineSearch();
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [history, setHistory] = useState([]);
 
-  // Connect to Native Voice Hook
   const { 
     text: voiceText, 
     isListening, 
@@ -21,7 +20,6 @@ export default function HomeTab() {
     resetText
   } = useVoiceInput();
 
-  // Effect: Update search when voice text changes
   useEffect(() => {
     if (voiceText) {
       setQuery(voiceText);
@@ -29,11 +27,11 @@ export default function HomeTab() {
     }
   }, [voiceText]);
 
-  // Effect: Load history on mount or when topic changes
   useEffect(() => {
     getHistory().then(data => {
-      // Show last 3 items, reversed (newest first)
-      setHistory(data.reverse().slice(0, 3));
+      // Sort by timestamp desc to show newest first
+      const sorted = data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+      setHistory(sorted.slice(0, 3));
     });
   }, [selectedTopic]);
 
@@ -52,17 +50,16 @@ export default function HomeTab() {
       <div className="relative z-0">
         <div className="flex justify-between items-center mb-2 px-1">
            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">
-             {t('app_title')} {/* TRANSLATED */}
+             {t('app_title')}
            </span>
            
-           {/* DB Status */}
            {isReady ? (
              <span className="text-[10px] bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full border border-green-200">
-               {t('status_ready')} {/* TRANSLATED */}
+               {t('status_ready')}
              </span>
            ) : (
              <span className="text-[10px] bg-yellow-100 text-yellow-700 font-bold px-2 py-0.5 rounded-full border border-yellow-200">
-               {t('status_loading')} {/* TRANSLATED */}
+               {t('status_loading')}
              </span>
            )}
         </div>
@@ -72,14 +69,12 @@ export default function HomeTab() {
             type="text"
             className={`w-full p-4 pl-12 pr-12 rounded-2xl border-2 shadow-sm focus:outline-none transition text-lg 
               ${isListening ? 'border-red-400 bg-red-50' : 'border-blue-100 focus:border-blue-500'}`}
-            // TRANSLATED PLACEHOLDER
             placeholder={isListening ? t('mic_listening') : t('search_placeholder')}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
           <span className="absolute left-4 text-xl">🔍</span>
           
-          {/* MIC BUTTON */}
           <button 
             onClick={handleMicClick}
             className={`absolute right-3 p-2 rounded-full transition-all ${
@@ -92,7 +87,6 @@ export default function HomeTab() {
           </button>
         </div>
 
-        {/* ERROR MESSAGE */}
         {voiceError && (
           <p className="text-xs text-red-500 text-center mt-1 bg-red-50 p-1 rounded">
             ⚠️ {t('mic_error')}
@@ -104,16 +98,15 @@ export default function HomeTab() {
       <div className="space-y-3 pb-20">
         {query === '' ? (
            <div className="text-center text-gray-500 mt-10">
-             <p className="mb-4">{t('empty_search')}</p> {/* TRANSLATED */}
+             <p className="mb-4">{t('empty_search')}</p>
              <div className="flex flex-wrap justify-center gap-2">
-               {/* Quick suggestions - Keeping these hardcoded or translate them if you wish */}
                <button onClick={() => setQuery('Photosynthesis')} className="bg-white px-3 py-1 rounded-full shadow-sm text-sm border text-blue-600 hover:bg-blue-50">🌱 Photosynthesis</button>
                <button onClick={() => setQuery('Space')} className="bg-white px-3 py-1 rounded-full shadow-sm text-sm border text-blue-600 hover:bg-blue-50">🪐 Space</button>
              </div>
            </div>
         ) : results.length === 0 ? (
            <div className="text-center text-gray-500 mt-10">
-             <p>{t('no_results')} "{query}"</p> {/* TRANSLATED */}
+             <p>{t('no_results')} "{query}"</p>
            </div>
         ) : (
            results.map((item) => (
@@ -121,7 +114,7 @@ export default function HomeTab() {
                key={item.id} 
                onClick={() => {
                  setSelectedTopic(item);
-                 addToHistory(item); // Save to DB
+                 addToHistory(item);
                }}
                className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 active:scale-95 transition cursor-pointer hover:shadow-md"
              >
@@ -132,7 +125,7 @@ export default function HomeTab() {
         )}
       </div>
       
-      {/* 3. RECENTLY LEARNED SECTION (From DB) */}
+      {/* 3. RECENTLY LEARNED SECTION */}
       {history.length > 0 && query === '' && (
         <div className="mt-8 border-t pt-4">
           <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-3">
@@ -149,7 +142,13 @@ export default function HomeTab() {
         </div>
       )}
 
-      <DetailModal topic={selectedTopic} onClose={() => setSelectedTopic(null)} />
+      {/* 4. NEW LEARNING MODE COMPONENT */}
+      {selectedTopic && (
+        <LearningMode 
+          topic={selectedTopic} 
+          onClose={() => setSelectedTopic(null)} 
+        />
+      )}
     </div>
   );
 }

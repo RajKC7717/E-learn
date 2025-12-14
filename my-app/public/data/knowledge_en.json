@@ -1,23 +1,436 @@
 [
   {
-    "id": "1",
-    "topic": "Photosynthesis",
-    "keywords": ["plant", "food", "sun", "light", "green", "energy"],
-    "summary": "Photosynthesis is how plants use sunlight to make food.",
-    "detail": "Plants take in water, carbon dioxide, and sunlight. Using chlorophyll in their leaves, they turn these into sugar (glucose) for food and release oxygen into the air."
+    "id": "sci_6_1",
+    "grade": 6,
+    "subject": "Science",
+    "topic": "Light and Shadow",
+    "keywords": ["light", "shadow", "reflection", "transparent", "opaque"],
+    "summary": "Understanding properties of light, shadow formation, and types of materials.",
+    "pages": [
+      { "title": "Sources of Light", "content": "Light is a form of energy that helps us see. Natural sources include the Sun and stars. Artificial sources include bulbs, candles, and torches. Light travels in straight lines." },
+      { "title": "Transparent and Opaque", "content": "Transparent objects allow light to pass through them completely (like glass). Opaque objects do not allow light to pass (like wood or metal). Translucent objects allow some light to pass (like butter paper)." },
+      { "title": "Formation of Shadows", "content": "A shadow is formed when an opaque object blocks light. The size of the shadow depends on the distance between the object, light source, and screen. Shadow is always formed on the opposite side of the light source." },
+      { "title": "Reflection of Light", "content": "When light falls on a smooth shiny surface like a mirror, it bounces back. This is called reflection. The angle at which light hits the surface equals the angle at which it reflects." }
+    ]
   },
   {
-    "id": "2",
-    "topic": "Water Cycle",
-    "keywords": ["rain", "cloud", "evaporation", "vapor", "river", "ocean"],
-    "summary": "The water cycle is the journey water takes as it circulates from the land to the sky and back again.",
-    "detail": "The sun heats up water from oceans and rivers, turning it into vapor (Evaporation). This vapor cools down to form clouds (Condensation). When clouds get heavy, water falls back as rain or snow (Precipitation)."
+    "id": "sci_6_2",
+    "grade": 6,
+    "subject": "Science",
+    "topic": "Air Around Us",
+    "keywords": ["air", "oxygen", "atmosphere", "wind", "breathing"],
+    "summary": "Composition of air, its properties, and importance for living beings.",
+    "pages": [
+      { "title": "What is Air?", "content": "Air is a mixture of gases that surrounds Earth. The main gases are Nitrogen (78%), Oxygen (21%), and small amounts of Carbon Dioxide, Water Vapor, and other gases. We cannot see or taste air, but we can feel it when it moves." },
+      { "title": "Properties of Air", "content": "Air occupies space and has weight. We can prove air occupies space by inverting an empty glass in water - water does not fill it completely. Air exerts pressure in all directions." },
+      { "title": "Oxygen and Life", "content": "All living beings need oxygen to breathe and survive. Plants give out oxygen during photosynthesis in the presence of sunlight. Animals and humans breathe in oxygen and breathe out carbon dioxide." },
+      { "title": "Atmosphere Layers", "content": "The layer of air surrounding Earth is called the atmosphere. It protects us from harmful sun rays and maintains temperature. It has different layers: Troposphere (weather occurs here), Stratosphere (contains ozone layer), and others." }
+    ]
   },
   {
-    "id": "3",
-    "topic": "Solar System",
-    "keywords": ["sun", "planets", "earth", "mars", "space", "orbit"],
-    "summary": "The Solar System consists of the Sun and everything that orbits around it.",
-    "detail": "Our Solar System has one star, the Sun, and eight planets: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune. Earth is the third planet from the Sun."
+    "id": "sci_6_3",
+    "grade": 6,
+    "subject": "Science",
+    "topic": "Water and Its Cycle",
+    "keywords": ["water", "evaporation", "condensation", "precipitation", "cycle"],
+    "summary": "States of water, water cycle, and conservation of water.",
+    "pages": [
+      { "title": "Three States of Water", "content": "Water exists in three states: Solid (ice), Liquid (water), and Gas (water vapor or steam). Water changes its state when heated or cooled. Ice melts at 0°C and water boils at 100°C." },
+      { "title": "The Water Cycle", "content": "Water on Earth keeps moving in a cycle. The Sun heats water in rivers, lakes, and oceans causing evaporation. Water vapor rises up, cools down, and forms clouds (condensation). When clouds become heavy, water falls as rain, snow, or hail (precipitation)." },
+      { "title": "Sources of Water", "content": "Rivers, lakes, ponds, wells, and groundwater are sources of freshwater. Oceans contain salt water which is not fit for drinking. Only 3% of Earth's water is fresh water and most of it is frozen in glaciers." },
+      { "title": "Water Conservation", "content": "We must save water because freshwater is limited. Turn off taps when not in use, fix leaking pipes, reuse water for plants, and harvest rainwater. Avoid wasting water while bathing or washing." }
+    ]
+  },
+  {
+    "id": "sci_6_4",
+    "grade": 6,
+    "subject": "Science",
+    "topic": "Electricity and Circuits",
+    "keywords": ["electricity", "circuit", "conductor", "insulator", "battery"],
+    "summary": "Basic concepts of electric circuits, conductors, and insulators.",
+    "pages": [
+      { "title": "What is Electricity?", "content": "Electricity is a form of energy that powers bulbs, fans, and machines. Electric current is the flow of electrons through a conductor. A battery or cell provides electric energy to run devices." },
+      { "title": "Electric Circuits", "content": "A closed path through which electricity flows is called an electric circuit. A simple circuit has a cell (battery), connecting wires, a bulb, and a switch. The bulb glows only when the circuit is complete and closed." },
+      { "title": "Conductors and Insulators", "content": "Materials that allow electricity to pass through them are called conductors. Examples include metals like copper, aluminum, and iron. Materials that do not allow electricity to pass are called insulators like rubber, plastic, and wood." },
+      { "title": "Safety with Electricity", "content": "Never touch electric wires with wet hands as water conducts electricity. Do not insert anything into electrical sockets. Always ask adults for help with electrical appliances. Use proper insulation on wires to prevent shocks." }
+    ]
+  },
+  {
+    "id": "sci_7_4",
+    "grade": 7,
+    "subject": "Science",
+    "topic": "Acids, Bases and Salts",
+    "keywords": ["acid", "base", "indicator", "pH", "neutralization"],
+    "summary": "Properties of acids and bases, indicators, and neutralization reactions.",
+    "pages": [
+      { "title": "What are Acids?", "content": "Acids are substances that taste sour and turn blue litmus paper red. Examples include lemon juice (citric acid), vinegar (acetic acid), and stomach acid (hydrochloric acid). Strong acids are corrosive and can burn skin." },
+      { "title": "What are Bases?", "content": "Bases are substances that taste bitter, feel slippery, and turn red litmus paper blue. Examples include soap, baking soda (sodium bicarbonate), and lime water. Strong bases like caustic soda are also corrosive." },
+      { "title": "Indicators", "content": "Indicators are substances that show different colors in acidic and basic solutions. Litmus is a natural indicator obtained from lichens. Turmeric, red cabbage juice, and phenolphthalein are other indicators. pH scale measures acidity from 0-14, where 7 is neutral." },
+      { "title": "Neutralization", "content": "When an acid and a base react together, they neutralize each other and form salt and water. This is called neutralization. Example: Hydrochloric acid plus Sodium hydroxide gives Sodium chloride (common salt) and water. Antacids neutralize excess stomach acid." }
+    ]
+  },
+  {
+    "id": "sci_7_5",
+    "grade": 7,
+    "subject": "Science",
+    "topic": "Heat and Temperature",
+    "keywords": ["heat", "temperature", "thermometer", "conduction", "convection"],
+    "summary": "Difference between heat and temperature, transfer of heat, and measurement.",
+    "pages": [
+      { "title": "Heat vs Temperature", "content": "Heat is a form of energy that flows from hot objects to cold objects. Temperature measures how hot or cold an object is. Temperature is measured using a thermometer in degrees Celsius (°C) or Fahrenheit (°F)." },
+      { "title": "Transfer of Heat - Conduction", "content": "Conduction is the transfer of heat through solids by direct contact. When you heat one end of a metal spoon, the other end also becomes hot. Metals are good conductors of heat. Wood and plastic are poor conductors (insulators)." },
+      { "title": "Convection and Radiation", "content": "Convection is heat transfer through liquids and gases by movement of particles. Hot water rises while cold water sinks creating convection currents. Radiation is heat transfer without any medium, like heat from the Sun reaching Earth." },
+      { "title": "Effects of Heat", "content": "Heat causes expansion in solids, liquids, and gases. Railway tracks have gaps to allow expansion in summer. Heat can change the state of matter - ice melts to water, water evaporates to steam. Some materials conduct heat better than others." }
+    ]
+  },
+  {
+    "id": "sci_8_3",
+    "grade": 8,
+    "subject": "Science",
+    "topic": "Sound and Its Properties",
+    "keywords": ["sound", "vibration", "frequency", "amplitude", "echo"],
+    "summary": "Production of sound, characteristics, and how sound travels.",
+    "pages": [
+      { "title": "How Sound is Produced", "content": "Sound is produced by vibrating objects. When an object vibrates, it creates disturbances in the surrounding air which travel as sound waves. We hear sound when these vibrations reach our ears. Sound needs a medium (solid, liquid, or gas) to travel." },
+      { "title": "Characteristics of Sound", "content": "Pitch depends on frequency - high frequency means high pitch (like a whistle), low frequency means low pitch (like a drum). Loudness depends on amplitude - larger vibrations produce louder sounds. Quality or timbre helps us distinguish between different sounds." },
+      { "title": "Speed of Sound", "content": "Sound travels at different speeds in different media. It travels fastest in solids (about 5000 m/s in steel), slower in liquids (about 1500 m/s in water), and slowest in gases (about 340 m/s in air). Sound cannot travel in vacuum." },
+      { "title": "Echo and Applications", "content": "Echo is the reflection of sound from a hard surface like a wall or mountain. To hear an echo, the reflecting surface must be at least 17 meters away. Bats and dolphins use echoes (echolocation) to navigate. SONAR uses sound waves to measure ocean depth." }
+    ]
+  },
+  {
+    "id": "sci_8_4",
+    "grade": 8,
+    "subject": "Science",
+    "topic": "Reproduction in Animals",
+    "keywords": ["reproduction", "asexual", "sexual", "fertilization", "embryo"],
+    "summary": "Types of reproduction, fertilization, and development in animals.",
+    "pages": [
+      { "title": "Why Reproduction?", "content": "Reproduction is the biological process by which organisms produce offspring. It ensures continuation of species. There are two types: Asexual reproduction (single parent) and Sexual reproduction (two parents needed)." },
+      { "title": "Asexual Reproduction", "content": "In asexual reproduction, a single organism produces offspring without mating. Methods include budding (in Hydra), binary fission (in Amoeba), and regeneration (in Planaria). The offspring are exact copies of the parent." },
+      { "title": "Sexual Reproduction", "content": "Sexual reproduction involves two parents - male and female. Male produces sperms and female produces eggs (ova). When a sperm fuses with an egg, fertilization occurs and a zygote is formed. The zygote develops into an embryo." },
+      { "title": "Development Stages", "content": "After fertilization, the zygote divides repeatedly to form an embryo. In viviparous animals (like humans, cows), the embryo develops inside the mother's body. In oviparous animals (like birds, frogs), the embryo develops inside an egg laid outside. The young one hatches or is born." }
+    ]
+  },
+  {
+    "id": "sci_8_5",
+    "grade": 8,
+    "subject": "Science",
+    "topic": "Metals and Non-Metals",
+    "keywords": ["metal", "non-metal", "properties", "reactivity", "alloy"],
+    "summary": "Physical and chemical properties of metals and non-metals.",
+    "pages": [
+      { "title": "Physical Properties of Metals", "content": "Metals have luster (shine) and are good conductors of heat and electricity. They are malleable (can be beaten into sheets) and ductile (can be drawn into wires). Most metals are solid at room temperature except mercury which is liquid. Examples: Iron, Copper, Aluminum, Gold." },
+      { "title": "Physical Properties of Non-Metals", "content": "Non-metals are generally dull (no luster) and are poor conductors of heat and electricity. They are brittle (break easily) and cannot be drawn into wires. Non-metals can be solid (sulfur, carbon), liquid (bromine), or gas (oxygen, nitrogen) at room temperature." },
+      { "title": "Chemical Properties", "content": "Metals react with oxygen to form metal oxides which are basic in nature. Metals react with acids to produce salt and hydrogen gas. Non-metals react with oxygen to form non-metal oxides which are acidic in nature. Some metals are more reactive than others." },
+      { "title": "Uses and Alloys", "content": "Metals are used in construction, electrical wiring, making utensils, and jewelry. Alloys are mixtures of two or more metals or a metal with a non-metal. Examples: Steel (iron + carbon), Brass (copper + zinc), Bronze (copper + tin). Alloys often have better properties than pure metals." }
+    ]
+  },
+  {
+    "id": "sci_8_6",
+    "grade": 8,
+    "subject": "Science",
+    "topic": "Cell Structure and Function",
+    "keywords": ["cell", "nucleus", "cytoplasm", "membrane", "organelles"],
+    "summary": "Discovery of cells, plant and animal cells, and their components.",
+    "pages": [
+      { "title": "Discovery of Cell", "content": "Robert Hooke discovered cells in 1665 while observing a thin slice of cork under a microscope. The word 'cell' means 'small room'. Later, scientists found that all living organisms are made up of cells. The cell is the basic structural and functional unit of life." },
+      { "title": "Parts of a Cell", "content": "Every cell has three main parts: Cell membrane (outer boundary that controls entry and exit of substances), Cytoplasm (jelly-like substance where cell activities occur), and Nucleus (control center containing genetic material DNA that controls all cell activities)." },
+      { "title": "Plant Cell vs Animal Cell", "content": "Plant cells have a rigid cell wall outside the cell membrane, chloroplasts for photosynthesis, and large vacuoles for storage. Animal cells do not have cell walls or chloroplasts, and have small vacuoles. Both have nucleus, cytoplasm, and cell membrane." },
+      { "title": "Cell Organelles", "content": "Cells contain tiny structures called organelles. Mitochondria produce energy (powerhouse of cell). Ribosomes make proteins. Endoplasmic reticulum transports materials. Golgi body packages materials. Lysosomes digest waste. Chloroplasts (in plants) perform photosynthesis." }
+    ]
+  },
+  {
+    "id": "math_6_1",
+    "grade": 6,
+    "subject": "Math",
+    "topic": "Whole Numbers and Operations",
+    "keywords": ["number", "addition", "subtraction", "multiplication", "division"],
+    "summary": "Properties of whole numbers and four basic operations.",
+    "pages": [
+      { "title": "What are Whole Numbers?", "content": "Whole numbers are the set of numbers starting from 0 and going infinitely: 0, 1, 2, 3, 4, 5... They include all natural numbers (counting numbers) plus zero. Whole numbers do not include negative numbers, fractions, or decimals." },
+      { "title": "Properties of Operations", "content": "Commutative Property: a + b = b + a and a × b = b × a. Associative Property: (a + b) + c = a + (b + c). Identity Property: a + 0 = a and a × 1 = a. Distributive Property: a × (b + c) = (a × b) + (a × c)." },
+      { "title": "Multiplication and Division", "content": "Multiplication is repeated addition. 4 × 3 means 4 added 3 times = 12. Division is repeated subtraction or inverse of multiplication. 12 ÷ 3 = 4 means how many times 3 can be subtracted from 12. Division by zero is undefined." },
+      { "title": "Order of Operations", "content": "When solving expressions with multiple operations, follow BODMAS/PEMDAS rule: Brackets/Parentheses first, then Orders/Exponents, then Division and Multiplication (left to right), then Addition and Subtraction (left to right). Example: 2 + 3 × 4 = 2 + 12 = 14, not 20." }
+    ]
+  },
+  {
+    "id": "math_6_2",
+    "grade": 6,
+    "subject": "Math",
+    "topic": "Fractions and Decimals",
+    "keywords": ["fraction", "decimal", "numerator", "denominator", "conversion"],
+    "summary": "Understanding fractions, decimals, and their conversions.",
+    "pages": [
+      { "title": "What is a Fraction?", "content": "A fraction represents a part of a whole. It has two parts: Numerator (top number, parts taken) and Denominator (bottom number, total parts). Example: 3/4 means 3 parts out of 4 equal parts. Types include proper, improper, and mixed fractions." },
+      { "title": "Operations with Fractions", "content": "To add or subtract fractions, make denominators equal (LCM method). Example: 1/2 + 1/3 = 3/6 + 2/6 = 5/6. To multiply fractions, multiply numerators and denominators separately. To divide fractions, multiply by the reciprocal of the second fraction." },
+      { "title": "Decimals", "content": "Decimals are another way to represent fractions with denominators 10, 100, 1000, etc. A decimal point separates the whole part from the fractional part. Example: 3.5 means 3 whole and 5 tenths. Place values: tenths, hundredths, thousandths." },
+      { "title": "Converting Between Forms", "content": "To convert fraction to decimal, divide numerator by denominator. Example: 1/4 = 0.25. To convert decimal to fraction, count decimal places and write as fraction. Example: 0.75 = 75/100 = 3/4 (simplified). Percentages can also be expressed as fractions and decimals." }
+    ]
+  },
+  {
+    "id": "math_6_3",
+    "grade": 6,
+    "subject": "Math",
+    "topic": "Integers",
+    "keywords": ["integer", "positive", "negative", "number line", "absolute"],
+    "summary": "Introduction to positive and negative numbers and operations on integers.",
+    "pages": [
+      { "title": "What are Integers?", "content": "Integers include all whole numbers and their negatives: ...-3, -2, -1, 0, 1, 2, 3... Positive integers are greater than zero, negative integers are less than zero. Zero is neither positive nor negative. We use integers to represent temperatures, bank balances, altitudes." },
+      { "title": "Number Line and Comparison", "content": "On a number line, positive numbers are to the right of zero, negative numbers to the left. Numbers increase as we move right. To compare: any positive number is greater than any negative number. Between negatives, the one closer to zero is greater. Example: -2 > -5." },
+      { "title": "Addition and Subtraction", "content": "To add integers with same sign, add their absolute values and keep the sign. For different signs, subtract absolute values and take the sign of larger number. Subtraction: Change the sign of number being subtracted and add. Example: 5 - 8 = 5 + (-8) = -3." },
+      { "title": "Multiplication and Division", "content": "Rules: Positive × Positive = Positive. Negative × Negative = Positive. Positive × Negative = Negative. Same rules apply for division. Example: (-3) × (-4) = 12, but (-3) × 4 = -12. Absolute value is distance from zero, always positive: |-5| = 5." }
+    ]
+  },
+  {
+    "id": "math_7_2",
+    "grade": 7,
+    "subject": "Math",
+    "topic": "Percentages and Profit-Loss",
+    "keywords": ["percentage", "profit", "loss", "discount", "interest"],
+    "summary": "Calculating percentages, profit, loss, and simple applications.",
+    "pages": [
+      { "title": "Understanding Percentages", "content": "Percent means 'per hundred'. 25% means 25 out of 100. To convert fraction to percentage, multiply by 100. Example: 1/4 = (1/4) × 100 = 25%. To convert percentage to fraction, divide by 100. Example: 30% = 30/100 = 3/10." },
+      { "title": "Finding Percentage", "content": "To find percentage of a number: (Percentage/100) × Number. Example: 20% of 500 = (20/100) × 500 = 100. To find what percent one number is of another: (Part/Whole) × 100. Example: 15 is what % of 60? (15/60) × 100 = 25%." },
+      { "title": "Profit and Loss", "content": "Cost Price (CP) is the price at which an item is bought. Selling Price (SP) is the price at which it is sold. Profit = SP - CP (when SP > CP). Loss = CP - SP (when CP > SP). Profit% = (Profit/CP) × 100. Loss% = (Loss/CP) × 100." },
+      { "title": "Discount and Tax", "content": "Discount is reduction in Marked Price (MP). Discount = MP - SP. Discount% = (Discount/MP) × 100. Sales Tax or GST is added to the price. Final Price = SP + Tax. Tax Amount = (Tax%/100) × SP. Example: If MP is Rs.1000 and discount is 20%, SP = 1000 - 200 = Rs.800." }
+    ]
+  },
+  {
+    "id": "math_7_3",
+    "grade": 7,
+    "subject": "Math",
+    "topic": "Simple Equations",
+    "keywords": ["equation", "variable", "expression", "solving", "linear"],
+    "summary": "Understanding variables, forming and solving simple linear equations.",
+    "pages": [
+      { "title": "Variables and Expressions", "content": "A variable is a symbol (usually a letter like x, y) that represents an unknown number. An algebraic expression combines variables and constants using operations. Examples: 2x + 5, 3y - 7, 4a + 2b. Constants are fixed values like 5, -3, 10." },
+      { "title": "What is an Equation?", "content": "An equation is a statement that two expressions are equal, connected by '=' sign. Example: 2x + 3 = 9. The value of the variable that makes the equation true is called the solution. LHS (Left Hand Side) and RHS (Right Hand Side) must be equal." },
+      { "title": "Solving Simple Equations", "content": "To solve an equation, isolate the variable on one side. Rules: Same number can be added/subtracted from both sides. Both sides can be multiplied/divided by same non-zero number. Example: 2x + 3 = 9. Subtract 3: 2x = 6. Divide by 2: x = 3." },
+      { "title": "Word Problems", "content": "Steps to solve word problems: 1) Read carefully and identify unknown. 2) Assign variable to unknown. 3) Form equation from given information. 4) Solve the equation. 5) Check if answer makes sense. Example: Sum of two consecutive numbers is 15. If first is x, then x + (x+1) = 15, so 2x = 14, x = 7." }
+    ]
+  },
+  {
+    "id": "math_7_4",
+    "grade": 7,
+    "subject": "Math",
+    "topic": "Perimeter and Area",
+    "keywords": ["perimeter", "area", "rectangle", "triangle", "circle"],
+    "summary": "Calculating perimeter and area of various plane figures.",
+    "pages": [
+      { "title": "Perimeter of Figures", "content": "Perimeter is the total distance around a closed figure. Rectangle: P = 2(length + width). Square: P = 4 × side. Triangle: P = sum of all three sides. Circle: Perimeter is called Circumference = 2πr, where r is radius and π ≈ 3.14 or 22/7." },
+      { "title": "Area of Basic Shapes", "content": "Area is the amount of surface enclosed within a boundary, measured in square units. Rectangle: A = length × width. Square: A = side × side. Triangle: A = (1/2) × base × height. Parallelogram: A = base × height. Circle: A = πr²." },
+      { "title": "Units of Measurement", "content": "Perimeter is measured in linear units: cm, m, km. Area is measured in square units: cm², m², km². Conversion: 1 m = 100 cm, so 1 m² = 100 cm × 100 cm = 10,000 cm². For hectare: 1 hectare = 10,000 m². Always use same units in a problem." },
+      { "title": "Practical Applications", "content": "Perimeter helps find fencing needed for a garden, or border for a picture frame. Area helps find carpet needed for a room, paint needed for a wall, or land measurement. Example: A rectangular field is 50m × 30m. Perimeter = 2(50+30) = 160m. Area = 50 × 30 = 1500 m²." }
+    ]
+  },
+  {
+    "id": "math_8_2",
+    "grade": 8,
+    "subject": "Math",
+    "topic": "Exponents and Powers",
+    "keywords": ["exponent", "power", "base", "index", "scientific notation"],
+    "summary": "Laws of exponents and expressing large numbers in standard form.",
+    "pages": [
+      { "title": "Understanding Exponents", "content": "When a number is multiplied by itself repeatedly, we use exponential form. Example: 2 × 2 × 2 × 2 = 2⁴ = 16. Here, 2 is the base and 4 is the exponent or power. Read as '2 to the power 4' or '2 raised to 4'. Any number to power 1 is itself: a¹ = a." },
+      { "title": "Laws of Exponents", "content": "Product Law: aᵐ × aⁿ = aᵐ⁺ⁿ. Quotient Law: aᵐ ÷ aⁿ = aᵐ⁻ⁿ. Power of Power: (aᵐ)ⁿ = aᵐⁿ. Power of Product: (ab)ᵐ = aᵐbᵐ. Zero Exponent: a⁰ = 1 (a ≠ 0). Negative Exponent: a⁻ᵐ = 1/aᵐ." },
+      { "title": "Scientific Notation", "content": "Very large or very small numbers can be expressed in scientific notation or standard form: a × 10ⁿ, where 1 ≤ a < 10 and n is an integer. Example: 45,000 = 4.5 × 10⁴. Example: 0.00067 = 6.7 × 10⁻⁴. This makes calculations easier." },
+      { "title": "Applications and Examples", "content": "Simplify: (2³)² × 2⁴ = 2⁶ × 2⁴ = 2¹⁰ = 1024. Simplify: (3² × 3⁵) ÷ 3⁴ = 3⁷ ÷ 3⁴ = 3³ = 27. Distance from Earth to Sun is about 150,000,000 km = 1.5 × 10⁸ km. Exponents are used in measuring astronomical distances, microscopic sizes, and compound interest calculations." }
+    ]
+  },
+  {
+    "id": "math_8_3",
+    "grade": 8,
+    "subject": "Math",
+    "topic": "Linear Equations in One Variable",
+    "keywords": ["linear", "equation", "variable", "transposition", "solving"],
+    "summary": "Solving complex linear equations using transposition method.",
+    "pages": [
+      { "title": "Linear Equations", "content": "A linear equation in one variable is an equation of the form ax + b = c, where a, b, c are constants and a ≠ 0. The highest power of the variable is 1. Examples: 3x + 5 = 14, (2x/3) - 7 = 1. These equations have exactly one solution." },
+      { "title": "Transposition Method", "content": "Transposition means moving a term from one side of equation to other side by changing its sign. Adding becomes subtracting and vice versa. Multiplying becomes dividing and vice versa. Example: 3x + 5 = 14. Transpose +5 to right: 3x = 14 - 5 = 9. Transpose ×3: x = 9/3 = 3." },
+      { "title": "Equations with Fractions", "content": "To solve equations with fractions, first find LCM of denominators and multiply both sides by it to clear fractions. Example: x/2 + x/3 = 10. LCM of 2,3 is 6. Multiply both sides by 6: 3x + 2x = 60. So 5x = 60, x = 12. Always verify solution by substituting back." },
+      { "title": "Word Problems to Equations", "content": "Translate word problems into equations. Keywords: 'sum' means +, 'difference' means -, 'product' means ×, 'is/equals' means =. Example: Three times a number increased by 5 equals 26. Let number be x. Equation: 3x + 5 = 26. Solution: 3x = 21, x = 7." }
+    ]
+  },
+  {
+    "id": "math_8_4",
+    "grade": 8,
+    "subject": "Math",
+    "topic": "Squares and Square Roots",
+    "keywords": ["square", "root", "perfect square", "pythagorean", "cube"],
+    "summary": "Properties of perfect squares and methods to find square roots.",
+    "pages": [
+      { "title": "Square Numbers", "content": "When a number is multiplied by itself, the product is called its square. Example: 5² = 5 × 5 = 25. Numbers like 1, 4, 9, 16, 25, 36... are perfect squares. Square of odd number is odd, square of even number is even. Sum of first n odd numbers = n²." },
+      { "title": "Properties of Squares", "content": "A number ending in 2, 3, 7, or 8 cannot be a perfect square. Squares end in 0, 1, 4, 5, 6, or 9 only. Between n² and (n+1)², there are 2n non-perfect square numbers. Example: Between 4² = 16 and 5² = 25, there are 2(4) = 8 numbers." },
+      { "title": "Square Roots", "content": "Square root is the inverse operation of squaring. If x² = y, then x is the square root of y, written as √y. Example: √25 = 5 because 5² = 25. Square root of a perfect square is always a whole number. Methods to find square roots: Prime factorization, Long division method." },
+      { "title": "Finding Square Roots", "content": "Prime Factorization Method: Express number as product of prime factors in pairs. Example: √144 = √(2×2×2×2×3×3) = 2×2×3 = 12. Long Division Method is used for larger numbers. Square root of a decimal can be found by removing decimal and restoring it in answer appropriately." }
+    ]
+  },
+  {
+    "id": "math_8_5",
+    "grade": 8,
+    "subject": "Math",
+    "topic": "Data Handling",
+    "keywords": ["data", "statistics", "graph", "mean", "median", "mode"],
+    "summary": "Collection and representation of data, measures of central tendency.",
+    "pages": [
+      { "title": "Organizing Data", "content": "Data is information collected for a purpose. Raw data is unorganized. We organize data in frequency tables showing how many times each value occurs. Example: Marks of 10 students: 45, 50, 45, 60, 50, 45, 70, 50, 60, 45. Frequency table shows 45 appears 4 times, 50 appears 3 times, etc." },
+      { "title": "Graphical Representation", "content": "Data can be shown visually using graphs. Bar Graph uses rectangular bars of equal width but varying heights. Histogram is similar but for continuous data. Pie Chart shows data as sectors of a circle where each sector represents a proportion. Line Graph shows trends over time." },
+      { "title": "Mean, Median, Mode", "content": "Mean (Average) = Sum of all observations ÷ Number of observations. Median is the middle value when data is arranged in order. For even number of values, median = average of two middle values. Mode is the value that occurs most frequently. A data set can have no mode, one mode, or multiple modes." },
+      { "title": "Range and Applications", "content": "Range = Highest value - Lowest value. It shows spread of data. Example: Test scores 45, 50, 55, 60, 65. Mean = (45+50+55+60+65)÷5 = 55. Median = 55 (middle value). No mode (all values appear once). Range = 65-45 = 20. These measures help analyze performance, trends, and make comparisons." }
+    ]
+  },
+  {
+    "id": "math_8_6",
+    "grade": 8,
+    "subject": "Math",
+    "topic": "Mensuration: Area and Volume",
+    "keywords": ["area", "volume", "cuboid", "cylinder", "surface area"],
+    "summary": "Calculating surface area and volume of 3D shapes.",
+    "pages": [
+      { "title": "Three-Dimensional Shapes", "content": "3D shapes have length, breadth, and height. Common shapes: Cube (all edges equal), Cuboid (rectangular box), Cylinder (circular base and top), Cone (circular base with pointed top), Sphere (perfectly round like a ball). Volume is space occupied, measured in cubic units." },
+      { "title": "Cuboid and Cube", "content": "Cuboid: Volume = length × breadth × height. Total Surface Area = 2(lb + bh + lh). Lateral Surface Area = 2h(l + b). Cube is special cuboid with all sides equal. Cube: Volume = side³. Total Surface Area = 6 × side². Example: Cube of side 5cm has volume = 125 cm³." },
+      { "title": "Cylinder", "content": "Cylinder has two circular bases connected by a curved surface. Volume = πr²h, where r is radius and h is height. Curved Surface Area = 2πrh. Total Surface Area = 2πrh + 2πr² = 2πr(h + r). Example: Cylinder with r=7cm, h=10cm has volume = (22/7)×7×7×10 = 1540 cm³." },
+      { "title": "Practical Applications", "content": "Volume helps find capacity of containers, tanks, water storage. Surface area helps calculate material needed for packaging, painting, or covering. Example: To find water in a cylindrical tank, calculate volume. To find paint needed for walls of a room (cuboid), calculate lateral surface area excluding floor and ceiling." }
+    ]
+  },
+  {
+    "id": "comp_6_1",
+    "grade": 6,
+    "subject": "Computer",
+    "topic": "Microsoft Word Basics",
+    "keywords": ["word", "typing", "formatting", "document", "editing"],
+    "summary": "Creating and formatting documents in MS Word.",
+    "pages": [
+      { "title": "Introduction to MS Word", "content": "Microsoft Word is a word processing software used to create text documents like letters, reports, and assignments. You can type, edit, format, and print documents. Main parts: Title Bar (shows document name), Menu Bar/Ribbon (contains tools), Workspace (where you type), Scroll bars (to move up/down)." },
+      { "title": "Creating and Saving", "content": "To create new document: Click File → New or press Ctrl+N. Type your content in the workspace. To save: Click File → Save or press Ctrl+S. Choose location, give file name, click Save. File gets .docx extension. Save regularly to avoid losing work. Save As creates a copy with different name or location." },
+      { "title": "Basic Formatting", "content": "Select text first, then apply formatting. Font: Change type, size, color from Home tab. Bold (Ctrl+B), Italic (Ctrl+I), Underline (Ctrl+U) for emphasis. Alignment: Left, Center, Right, Justify buttons. Line spacing controls gap between lines. Bullets and numbering create lists." },
+      { "title": "Editing Tools", "content": "Cut (Ctrl+X), Copy (Ctrl+C), Paste (Ctrl+V) to move or duplicate text. Undo (Ctrl+Z) reverses last action, Redo (Ctrl+Y) restores it. Find (Ctrl+F) searches for text. Replace (Ctrl+H) changes text throughout document. Spell Check identifies spelling mistakes with red underline. Grammar errors shown with blue underline." }
+    ]
+  },
+  {
+    "id": "comp_6_2",
+    "grade": 6,
+    "subject": "Computer",
+    "topic": "Operating System Basics",
+    "keywords": ["windows", "OS", "file", "folder", "desktop"],
+    "summary": "Understanding operating systems and file management.",
+    "pages": [
+      { "title": "What is an Operating System?", "content": "An Operating System (OS) is system software that manages computer hardware and software. It acts as an interface between user and computer. Common OS: Windows, macOS, Linux, Android, iOS. OS manages memory, controls peripherals, runs applications, and provides user interface." },
+      { "title": "Desktop and Icons", "content": "Desktop is the main screen you see after starting computer. Icons are small pictures representing files, folders, or programs. Important icons: My Computer/This PC (access drives), Recycle Bin (stores deleted files), Taskbar (at bottom, shows running programs), Start Menu (access all programs and settings)." },
+      { "title": "Files and Folders", "content": "File is a collection of data stored with a name. Types: Document files (.docx, .pdf), Image files (.jpg, .png), Video files (.mp4), Audio files (.mp3). Folder (Directory) is a container to organize files. You can create folders inside folders (subfolders) to organize better." },
+      { "title": "File Management", "content": "To create folder: Right-click → New → Folder. Give it a name. Copy file: Right-click → Copy, then Paste in destination. Move file: Cut and Paste or drag and drop. Delete file: Select and press Delete key (goes to Recycle Bin). Empty Recycle Bin permanently removes files. Search bar helps find files quickly." }
+    ]
+  },
+  {
+    "id": "comp_6_3",
+    "grade": 6,
+    "subject": "Computer",
+    "topic": "Paint and Drawing",
+    "keywords": ["paint", "drawing", "tools", "colors", "shapes"],
+    "summary": "Creating digital drawings using Microsoft Paint.",
+    "pages": [
+      { "title": "Introduction to MS Paint", "content": "Microsoft Paint is a simple graphics program for creating and editing pictures. Used for drawing, coloring, and basic image editing. Main tools: Pencil (freehand drawing), Brush (thick lines), Eraser (removes parts), Fill (colors areas), Text (adds words), Shapes (draws geometric figures)." },
+      { "title": "Drawing Tools", "content": "Pencil tool draws thin lines. Brush has different styles and sizes. Line tool draws straight lines. Curve tool creates curved lines. Select color from Color Palette (bottom). Left-click selects foreground color, right-click selects background color. Size slider changes tool thickness." },
+      { "title": "Shapes and Fill", "content": "Shapes menu has rectangle, circle, triangle, polygon, etc. Click shape, then drag on canvas to draw. Outline color is foreground color. Fill with Paint Bucket tool by clicking inside closed area. Use different colors to make colorful designs. Eyedropper tool picks color from existing image." },
+      { "title": "Editing and Saving", "content": "Select tool chooses rectangular area. Free-form select chooses irregular shapes. Cut, Copy, Paste work with selected areas. Rotate/Flip options in Image menu. Resize changes image dimensions. To save: File → Save. Choose JPEG (photos) or PNG (drawings with transparency). BMP is uncompressed format." }
+    ]
+  },
+  {
+    "id": "comp_7_2",
+    "grade": 7,
+    "subject": "Computer",
+    "topic": "Microsoft Excel Basics",
+    "keywords": ["excel", "spreadsheet", "formula", "cell", "chart"],
+    "summary": "Creating spreadsheets and performing calculations in MS Excel.",
+    "pages": [
+      { "title": "Introduction to Excel", "content": "Microsoft Excel is a spreadsheet program used for calculations, data analysis, and creating charts. Worksheet has rows (numbered 1,2,3...) and columns (labeled A,B,C...). Intersection of row and column is called Cell (like A1, B5). Active cell has dark border. Cell address identifies each cell uniquely." },
+      { "title": "Entering and Editing Data", "content": "Click cell and type to enter data. Press Enter to move to next cell below, Tab for next cell right. Types of data: Text (names, labels), Numbers (for calculations), Dates. To edit: Double-click cell or press F2. Column width can be adjusted by dragging column border. AutoFill: Drag fill handle to copy or continue pattern." },
+      { "title": "Formulas and Functions", "content": "Formula starts with = sign and performs calculations. Example: =A1+B1 adds values in cells A1 and B1. Basic operators: + (add), - (subtract), * (multiply), / (divide). Functions: SUM (adds range), AVERAGE (finds mean), MAX (largest value), MIN (smallest value). Example: =SUM(A1:A10) adds all values from A1 to A10." },
+      { "title": "Formatting and Charts", "content": "Format numbers: Currency ($), Percentage (%), Date formats. Merge cells combines multiple cells. Cell borders and shading improve appearance. Charts visualize data: Column chart (compare values), Pie chart (show parts of whole), Line chart (show trends). Select data, click Insert tab, choose chart type." }
+    ]
+  },
+  {
+    "id": "comp_7_3",
+    "grade": 7,
+    "subject": "Computer",
+    "topic": "Internet and Web Browsing",
+    "keywords": ["internet", "browser", "URL", "search", "email"],
+    "summary": "Understanding internet, web browsers, and searching information online.",
+    "pages": [
+      { "title": "What is Internet?", "content": "Internet is a global network of interconnected computers that share information. It's like a massive library accessible from anywhere. World Wide Web (WWW) is a system of interlinked documents and resources accessed via internet. Uses: Communication, education, entertainment, shopping, banking." },
+      { "title": "Web Browsers and URLs", "content": "Web Browser is software to access internet (Chrome, Firefox, Edge, Safari). URL (Uniform Resource Locator) is web address. Example: https://www.google.com. Parts: Protocol (https://), Domain name (google.com), Path (/search). Homepage is the starting page. Bookmarks save favorite sites for quick access." },
+      { "title": "Searching Information", "content": "Search Engine helps find information (Google, Bing, Yahoo). Type keywords in search box and press Enter. Results show relevant websites. Use specific keywords for better results. Use quotes for exact phrase: 'Taj Mahal history'. Advanced search filters results by date, type, or region. Evaluate sources for reliability." },
+      { "title": "Email Basics", "content": "Email (Electronic Mail) sends messages over internet. Email address format: username@domain.com. Parts of email: To (recipient), Subject (topic), Body (message), Attachments (files). Inbox stores received emails. Sent folder keeps copies of sent emails. Spam is unwanted email. Never share password with anyone." }
+    ]
+  },
+  {
+    "id": "comp_7_4",
+    "grade": 7,
+    "subject": "Computer",
+    "topic": "PowerPoint Presentations",
+    "keywords": ["powerpoint", "presentation", "slide", "animation", "design"],
+    "summary": "Creating engaging presentations using Microsoft PowerPoint.",
+    "pages": [
+      { "title": "Introduction to PowerPoint", "content": "Microsoft PowerPoint creates presentations using slides. Each slide displays information with text, images, charts. Used for school projects, business meetings, lectures. Main components: Slides pane (left, shows all slides), Workspace (center, current slide), Notes pane (below, speaker notes)." },
+      { "title": "Creating Slides", "content": "New presentation starts with Title slide. Add slides: Home → New Slide. Slide layouts: Title Slide, Title and Content, Two Content, Blank, etc. Choose layout based on content. Text boxes hold text. Placeholder boxes guide content placement. Change layout anytime from Home tab." },
+      { "title": "Design and Formatting", "content": "Design tab has themes with colors, fonts, and effects. Apply theme for consistent look. Insert tab adds pictures, shapes, charts, tables, icons. Format pictures: resize, crop, rotate. WordArt creates decorative text. Align and distribute objects evenly. Group objects to move together. Background styles change slide background." },
+      { "title": "Animation and Slideshow", "content": "Animations make objects move on slide. Select object → Animations tab → choose effect. Entrance (appears), Emphasis (highlights), Exit (disappears). Control duration and order. Transitions change how slides appear. Apply to all slides for consistency. Slideshow: Press F5 to start from beginning, Shift+F5 from current slide. Navigate with arrow keys or click." }
+    ]
+  },
+  {
+    "id": "comp_8_2",
+    "grade": 8,
+    "subject": "Computer",
+    "topic": "Scratch Programming",
+    "keywords": ["scratch", "programming", "coding", "sprite", "blocks"],
+    "summary": "Introduction to visual programming using Scratch.",
+    "pages": [
+      { "title": "What is Scratch?", "content": "Scratch is a visual programming language for beginners. Created by MIT, it uses colorful blocks instead of text code. You create interactive stories, games, and animations by snapping blocks together. Sprite is a character or object. Stage is the area where sprites perform. Scratch teaches logic, sequences, and problem-solving." },
+      { "title": "Scratch Interface", "content": "Stage (top right) shows output. Sprite List (below stage) displays all sprites. Blocks Palette (left) has coding blocks in categories: Motion (move sprite), Looks (appearance), Sound (audio), Events (start actions), Control (loops, conditions), Sensing (detect), Operators (math), Variables (store data)." },
+      { "title": "Basic Programming Concepts", "content": "Sequence: Blocks execute in order from top to bottom. Loop: Repeat actions using Forever, Repeat blocks. Example: Repeat 10 times, Move 10 steps makes sprite move 100 steps total. Conditions: If-Then blocks check conditions. Example: If touching edge, bounce. Variables store values like score. Events start scripts like 'When green flag clicked'." },
+      { "title": "Creating Simple Projects", "content": "Moving sprite: Use Motion blocks like 'move 10 steps', 'turn 15 degrees'. Costume change creates animation effect. Sensing blocks detect mouse, keyboard, other sprites. Example project: Make a cat chase a mouse. Use 'point towards mouse' and 'move steps'. Add 'if touching mouse' to detect catch. Broadcast sends messages between sprites for interaction." }
+    ]
+  },
+  {
+    "id": "comp_8_3",
+    "grade": 8,
+    "subject": "Computer",
+    "topic": "HTML Basics",
+    "keywords": ["HTML", "webpage", "tags", "browser", "elements"],
+    "summary": "Creating simple web pages using HTML.",
+    "pages": [
+      { "title": "Introduction to HTML", "content": "HTML (HyperText Markup Language) is the standard language for creating web pages. It uses tags to structure content. Browser reads HTML and displays the page. HTML file has .html or .htm extension. HTML is not a programming language; it's a markup language that defines structure and content." },
+      { "title": "HTML Structure and Tags", "content": "Basic structure: <!DOCTYPE html> declares HTML5. <html> root element. <head> contains metadata, title. <body> contains visible content. Tags are enclosed in angle brackets: <tagname>. Most tags have opening <tag> and closing </tag>. Example: <p>This is paragraph</p>. Some tags are self-closing like <br/> for line break, <img/> for image." },
+      { "title": "Common HTML Elements", "content": "Headings: <h1> largest to <h6> smallest. Paragraph: <p>. Bold: <b> or <strong>. Italic: <i> or <em>. Line break: <br/>. Horizontal line: <hr/>. Lists: <ul> unordered (bullets), <ol> ordered (numbers), <li> list item. Link: <a href='url'>text</a>. Image: <img src='file.jpg' alt='description'/>." },
+      { "title": "Creating First Webpage", "content": "Open Notepad, type HTML code. Example:\n<!DOCTYPE html>\n<html>\n<head>\n  <title>My Page</title>\n</head>\n<body>\n  <h1>Welcome</h1>\n  <p>This is my first webpage.</p>\n</body>\n</html>\nSave as 'page.html'. Open with browser to view. Attributes provide additional information: href (link destination), src (image source), alt (alternative text)." }
+    ]
+  },
+  {
+    "id": "comp_8_4",
+    "grade": 8,
+    "subject": "Computer",
+    "topic": "Database Concepts",
+    "keywords": ["database", "table", "record", "field", "DBMS"],
+    "summary": "Understanding databases and their organization.",
+    "pages": [
+      { "title": "What is a Database?", "content": "A database is an organized collection of related data stored electronically. Used to store large amounts of information efficiently. Examples: School database (students, teachers, marks), Library database (books, members, issues), Bank database (accounts, transactions). Data can be easily searched, sorted, and retrieved." },
+      { "title": "Database Structure", "content": "Table: Organized data in rows and columns. Record (Row): Complete set of information about one item. Field (Column): Single piece of information. Example: Student table has records for each student. Fields: Roll No, Name, Class, Marks. Primary Key uniquely identifies each record (like Roll No)." },
+      { "title": "DBMS and Examples", "content": "DBMS (Database Management System) is software to create and manage databases. Examples: MS Access, MySQL, Oracle, SQLite. Advantages: Reduce data redundancy, easy to update, multiple users can access, data security, backup and recovery. Queries retrieve specific data based on conditions." },
+      { "title": "Real-world Applications", "content": "Schools use databases for student records, attendance, results. Banks store account information, transactions. Hospitals maintain patient records, appointments, medical history. E-commerce sites store products, customers, orders. Social media platforms store user profiles, posts, connections. Databases make information management efficient and organized." }
+    ]
+  },
+  {
+    "id": "comp_8_5",
+    "grade": 8,
+    "subject": "Computer",
+    "topic": "Computer Networks",
+    "keywords": ["network", "LAN", "WAN", "topology", "protocol"],
+    "summary": "Understanding computer networks and their types.",
+    "pages": [
+      { "title": "What is a Network?", "content": "A computer network is a group of interconnected computers that share resources and information. Benefits: Share files, printers, internet connection. Communication through emails, messages. Network devices: Router (connects networks), Switch (connects devices in network), Hub (basic connector), Modem (connects to internet)." },
+      { "title": "Types of Networks", "content": "LAN (Local Area Network): Covers small area like home, school, office. High speed, low cost. Example: Computer lab network. MAN (Metropolitan Area Network): Covers a city. Example: Cable TV network. WAN (Wide Area Network): Covers large area like country or world. Example: Internet. Speed decreases as coverage increases." },
+      { "title": "Network Topology", "content": "Topology is the physical/logical arrangement of network. Bus: All devices connected to single cable. Star: All devices connected to central hub/switch (most common). Ring: Devices connected in circular fashion. Mesh: Each device connected to every other device. Tree: Combination of bus and star topologies." },
+      { "title": "Protocols and Standards", "content": "Protocol is a set of rules for communication. TCP/IP (Transmission Control Protocol/Internet Protocol): Main internet protocol. HTTP (HyperText Transfer Protocol): For web pages. FTP (File Transfer Protocol): For file transfer. SMTP (Simple Mail Transfer Protocol): For email. IP Address uniquely identifies device on network." }
+    ]
   }
 ]
