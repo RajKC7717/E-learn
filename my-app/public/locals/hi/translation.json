@@ -1,0 +1,17 @@
+{
+  "app_title": "ट्यूटर एआई (ऑफलाइन)",
+  "search_placeholder": "पौधों, बारिश के बारे में पूछें...",
+  "status_loading": "लोड हो रहा है...",
+  "status_ready": "डेटा तैयार",
+  "mic_listening": "सुन रहा हूँ...",
+  "mic_error": "समझ नहीं आया। पुनः प्रयास करें।",
+  "empty_search": "इसके लिए खोजें:",
+  "no_results": "कोई परिणाम नहीं मिला:",
+  "read_aloud": "जोर से पढ़ें",
+  "stop_reading": "पढ़ना बंद करें",
+  "settings": "सेटिंग्स",
+  "home": "होम",
+  "config": "कॉन्फ़िगर",
+  "language": "भाषा",
+  "select_language": "भाषा चुनें"
+}

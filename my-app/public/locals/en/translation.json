@@ -1,0 +1,17 @@
+{
+  "app_title": "TutorAI Offline",
+  "search_placeholder": "Ask about plants, rain...",
+  "status_loading": "LOADING...",
+  "status_ready": "DB READY",
+  "mic_listening": "Listening...",
+  "mic_error": "Did not catch that. Try again.",
+  "empty_search": "Try searching for:",
+  "no_results": "No topics found for",
+  "read_aloud": "Read Aloud",
+  "stop_reading": "Stop Reading",
+  "settings": "Settings",
+  "home": "Home",
+  "config": "Config",
+  "language": "Language",
+  "select_language": "Select Language"
+}

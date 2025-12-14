@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "topic": "Photosynthesis",
+    "keywords": ["plant", "food", "sun", "light", "green", "energy"],
+    "summary": "Photosynthesis is how plants use sunlight to make food.",
+    "detail": "Plants take in water, carbon dioxide, and sunlight. Using chlorophyll in their leaves, they turn these into sugar (glucose) for food and release oxygen into the air."
+  },
+  {
+    "id": "2",
+    "topic": "Water Cycle",
+    "keywords": ["rain", "cloud", "evaporation", "vapor", "river", "ocean"],
+    "summary": "The water cycle is the journey water takes as it circulates from the land to the sky and back again.",
+    "detail": "The sun heats up water from oceans and rivers, turning it into vapor (Evaporation). This vapor cools down to form clouds (Condensation). When clouds get heavy, water falls back as rain or snow (Precipitation)."
+  },
+  {
+    "id": "3",
+    "topic": "Solar System",
+    "keywords": ["sun", "planets", "earth", "mars", "space", "orbit"],
+    "summary": "The Solar System consists of the Sun and everything that orbits around it.",
+    "detail": "Our Solar System has one star, the Sun, and eight planets: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune. Earth is the third planet from the Sun."
+  }
+]
