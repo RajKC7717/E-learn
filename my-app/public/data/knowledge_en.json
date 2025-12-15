@@ -54,6 +54,30 @@
       { "title": "Conductors and Insulators", "content": "Materials that allow electricity to pass through them are called conductors. Examples include metals like copper, aluminum, and iron. Materials that do not allow electricity to pass are called insulators like rubber, plastic, and wood." },
       { "title": "Safety with Electricity", "content": "Never touch electric wires with wet hands as water conducts electricity. Do not insert anything into electrical sockets. Always ask adults for help with electrical appliances. Use proper insulation on wires to prevent shocks." }
     ]
+    ,
+    "quiz": [
+  {
+    "type": "mcq",
+    "question": "Which material is a good conductor of electricity?",
+    "options": ["Rubber", "Plastic", "Copper", "Wood"],
+    "answer": "Copper"
+  },
+  {
+    "type": "mcq",
+    "question": "When does a bulb glow in an electric circuit?",
+    "options": ["When circuit is open", "When circuit is closed", "When there is no battery", "When wires are removed"],
+    "answer": "When circuit is closed"
+  },
+  {
+    "type": "match",
+    "question": "Match the material with its property",
+    "pairs": [
+      { "left": "Copper wire", "right": "Conductor" },
+      { "left": "Rubber", "right": "Insulator" },
+      { "left": "Iron", "right": "Conductor" }
+    ]
+  }
+]
   },
   {
     "id": "sci_7_4",

@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
-import { useTranslation } from 'react-i18next'; // <--- IMPORT ADDED
+import { useTranslation } from 'react-i18next';
 
 export function useVoiceInput() {
-  const { i18n } = useTranslation(); // <--- GET CURRENT LANGUAGE
+  const { i18n } = useTranslation();
   const [text, setText] = useState('');
   const [isListening, setIsListening] = useState(false);
   const [error, setError] = useState(null);
@@ -20,8 +20,7 @@ export function useVoiceInput() {
 
     const recognition = new SpeechRecognition();
     recognition.continuous = false;
-    recognition.interimResults = false;
-    // Default to English initially, but we will override this on start
+    recognition.interimResults = false; // We keep this false as per your code
     recognition.lang = 'en-US'; 
 
     recognition.onstart = () => {
@@ -30,14 +29,21 @@ export function useVoiceInput() {
     };
 
     recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript;
-      setText(transcript);
+      // Safely access transcript
+      const transcript = event.results?.[0]?.[0]?.transcript;
+      if (transcript) setText(transcript);
     };
 
     recognition.onerror = (event) => {
       console.error("Speech Error:", event.error);
-      // specific error for language mismatch or no speech
-      if (event.error === 'no-speech') {
+      
+      // --- NEW: DETECT OFFLINE ERROR ---
+      if (event.error === 'network') {
+        // This specific string triggers the Help Modal in AiAssistant.jsx
+        setError('offline_missing'); 
+      } 
+      // --- END NEW ---
+      else if (event.error === 'no-speech') {
         setError(i18n.language.startsWith('hi') ? "कुछ नहीं सुनाई दिया" : "Did not hear anything.");
       } else {
         setError(i18n.language.startsWith('hi') ? "त्रुटि। पुनः प्रयास करें।" : "Error. Try again.");
@@ -50,12 +56,12 @@ export function useVoiceInput() {
     };
 
     recognitionRef.current = recognition;
-  }, []); // Run once on mount
+  }, [i18n.language]); // Dependency ensures language updates if needed
 
   const startListening = () => {
     if (recognitionRef.current && !isListening) {
       try {
-        // <--- CRITICAL UPDATE: Set language dynamically before starting --->
+        // Dynamic Language Set
         const currentLang = i18n.language.startsWith('hi') ? 'hi-IN' : 'en-US';
         recognitionRef.current.lang = currentLang;
         
@@ -73,6 +79,7 @@ export function useVoiceInput() {
   };
 
   const resetText = () => setText('');
+  const clearError = () => setError(null); // Helper for the Modal Close button
 
   return { 
     text, 
@@ -81,6 +88,7 @@ export function useVoiceInput() {
     error, 
     startListening, 
     stopListening,
-    resetText
+    resetText,
+    clearError // Exported for the Modal
   };
 }

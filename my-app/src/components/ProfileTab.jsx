@@ -1,28 +1,34 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getUser, getAllProgress, getSyncPayload, logoutUser } from '../utils/db';
-import Toast from './Toast'; // <--- NEW IMPORT
+import { supabase } from '../utils/supabase'; // <--- Cloud Connection
+import Toast from './Toast';
 
 export default function ProfileTab() {
   const { t, i18n } = useTranslation();
+  
+  // State
   const [user, setUser] = useState(null);
   const [stats, setStats] = useState({ totalRead: 0, completed: 0, bySubject: {} });
   const [isSyncing, setIsSyncing] = useState(false);
-  
-  // TOAST STATE
   const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
 
+  // 1. Load Local Data
   useEffect(() => {
     async function loadData() {
       const u = await getUser();
       setUser(u);
 
-      const progressData = await getAllProgress(); // Now correctly filtered by User ID
+      if (!u) return;
+
+      const progressData = await getAllProgress(); // Filtered by user in db.js
       
+      // Load Topic Metadata to calculate percentages
       const lang = i18n.language.startsWith('hi') ? 'hi' : 'en';
       const response = await fetch(`/data/knowledge_${lang}.json`);
       const allTopics = await response.json();
 
+      // Calculate Stats
       const subjectCounts = {}; 
       allTopics.forEach(topic => {
         const sub = topic.subject;
@@ -55,38 +61,47 @@ export default function ProfileTab() {
     loadData();
   }, [i18n.language]);
 
-  const showToast = (message, type = 'success') => {
-    setToast({ show: true, message, type });
-  };
-
+  // 2. Sync Logic (Upload to Supabase)
   const handleSync = async () => {
     if (!navigator.onLine) {
-      showToast("⚠️ Connect to Internet to Sync", "error");
+      setToast({ show: true, message: "⚠️ Connect to Internet to Sync", type: "error" });
       return;
     }
 
     setIsSyncing(true);
     try {
       const payload = await getSyncPayload();
-      console.log("Syncing Payload:", payload);
       
-      await new Promise(r => setTimeout(r, 2000)); 
-      
-      showToast(`✅ Data Synced for ${payload.student_id}!`, "success");
+      if (!payload) throw new Error("No data to sync");
+
+      // Upload/Update in Supabase
+      const { error } = await supabase
+        .from('student_progress')
+        .upsert({ 
+          id: payload.student_id,
+          name: payload.student_name,
+          grade: payload.grade,
+          completed_count: payload.completed_topics.length,
+          last_sync: new Date(),
+          raw_data: payload
+        });
+
+      if (error) throw error;
+
+      setToast({ show: true, message: `✅ Synced to Cloud for ${payload.student_id}!`, type: "success" });
     } catch (error) {
       console.error(error);
-      showToast("❌ Sync Failed. Try again.", "error");
+      setToast({ show: true, message: "❌ Cloud Sync Failed.", type: "error" });
     } finally {
       setIsSyncing(false);
     }
   };
 
   const handleLogout = async () => {
-    // We can use a custom confirmation dialog here too if we want, 
-    // but standard confirm is okay for critical destructive actions. 
-    // Or we can just logout immediately.
-    await logoutUser();
-    window.location.reload(); 
+    if (confirm("Are you sure you want to logout?")) {
+      await logoutUser();
+      window.location.reload(); 
+    }
   };
 
   if (!user) return <div className="p-10 text-center">Loading Profile...</div>;
@@ -94,7 +109,7 @@ export default function ProfileTab() {
   return (
     <div className="p-4 space-y-6 animate-in slide-in-from-right duration-300">
       
-      {/* TOAST NOTIFICATION COMPONENT */}
+      {/* Toast Notification */}
       {toast.show && (
         <Toast 
           message={toast.message} 
@@ -103,12 +118,13 @@ export default function ProfileTab() {
         />
       )}
 
-      {/* USER CARD */}
+      {/* User Card */}
       <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-3xl p-6 text-white shadow-lg shadow-blue-200 relative overflow-hidden">
+        {/* Sync Button */}
         <button 
           onClick={handleSync}
           disabled={isSyncing}
-          className="absolute top-4 right-4 bg-white/20 hover:bg-white/30 p-2 px-3 rounded-full text-xs font-bold flex items-center gap-1 backdrop-blur-sm transition"
+          className="absolute top-4 right-4 bg-white/20 hover:bg-white/30 p-2 px-3 rounded-full text-xs font-bold flex items-center gap-1 backdrop-blur-sm transition active:scale-95"
         >
           {isSyncing ? '⏳ Syncing...' : '☁️ Sync Progress'}
         </button>
@@ -135,7 +151,7 @@ export default function ProfileTab() {
         </div>
       </div>
 
-      {/* SUBJECT PROGRESS */}
+      {/* Subject Progress Bars */}
       <div>
         <h3 className="font-bold text-gray-800 text-lg mb-4">Subject Progress</h3>
         <div className="space-y-4">
@@ -159,7 +175,7 @@ export default function ProfileTab() {
         </div>
       </div>
 
-      {/* LOGOUT BUTTON */}
+      {/* Logout */}
       <div className="mt-8 text-center pb-8">
         <button 
             onClick={handleLogout}

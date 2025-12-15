@@ -140,3 +140,17 @@ export const getSyncPayload = async () => {
     raw_progress: userProgress
   };
 };
+
+// --- TEACHER DASHBOARD FUNCTIONS ---
+export const saveTeacherData = async (studentsList) => {
+  const db = await initDB();
+  // We use a simple key-value pair in the 'user' store for now, 
+  // or ideally create a new store. But let's reuse 'user' store with a special ID to keep it simple.
+  return db.put('user', { id: 'teacher_data_store', data: studentsList });
+};
+
+export const getTeacherData = async () => {
+  const db = await initDB();
+  const record = await db.get('user', 'teacher_data_store');
+  return record ? record.data : [];
+};

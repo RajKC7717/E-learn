@@ -1,34 +1,51 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTextToSpeech } from '../hooks/useTextToSpeech';
-import { updateProgress } from '../utils/db'; // Connect to DB
+import { updateProgress } from '../utils/db'; 
+import QuizMode from './QuizMode'; // <--- NEW IMPORT
 
 export default function LearningMode({ topic, onClose }) {
   const { t, i18n } = useTranslation();
   const { speak, stop, isSpeaking } = useTextToSpeech();
   
-  // State for current page (starts at 0)
   const [pageIndex, setPageIndex] = useState(0);
+  const [mode, setMode] = useState('reading'); // 'reading' or 'quiz'
 
-  // Normalize data: specific handle for "New" (pages) vs "Old" (detail) structure
+  // Normalize data
   const pages = topic?.pages || [{ title: topic?.topic, content: topic?.detail }];
   const totalPages = pages.length;
   const currentPage = pages[pageIndex];
 
-  // Effect: Save progress whenever page changes
   useEffect(() => {
-    if (topic?.id) {
+    // Only update progress if we are READING. 
+    // Quiz updates completion separately.
+    if (topic?.id && mode === 'reading') {
       updateProgress(topic.id, pageIndex, totalPages);
     }
-    stop(); // Stop speaking when turning page
-  }, [pageIndex, topic]);
+    stop(); 
+  }, [pageIndex, topic, mode]);
 
-  // Navigation Handlers
+  // --- RENDER QUIZ MODE IF ACTIVE ---
+  if (mode === 'quiz') {
+    return (
+      <div className="fixed inset-0 bg-white z-50 animate-in slide-in-from-right">
+        {/* Pass onClose as onFinish so it closes the modal when quiz is done */}
+        <QuizMode topic={topic} onFinish={onClose} />
+      </div>
+    );
+  }
+
+  // --- EXISTING READING LOGIC ---
   const handleNext = () => {
     if (pageIndex < totalPages - 1) {
       setPageIndex(prev => prev + 1);
     } else {
-      onClose(); // Close on finish
+      // If quiz exists, go to quiz. Else finish.
+      if (topic.quiz && topic.quiz.length > 0) {
+        setMode('quiz');
+      } else {
+        onClose();
+      }
     }
   };
 
@@ -40,7 +57,6 @@ export default function LearningMode({ topic, onClose }) {
     if (isSpeaking) {
       stop();
     } else {
-      // Read Title + Content of current page
       const textToRead = `${currentPage.title}. ${currentPage.content}`;
       speak(textToRead, i18n.language);
     }
@@ -51,7 +67,7 @@ export default function LearningMode({ topic, onClose }) {
   return (
     <div className="fixed inset-0 bg-white z-50 flex flex-col animate-in slide-in-from-bottom duration-300">
       
-      {/* 1. HEADER (Progress Bar & Close) */}
+      {/* 1. HEADER */}
       <div className="flex items-center justify-between p-4 border-b bg-gray-50">
         <div className="flex flex-col">
           <h2 className="font-bold text-lg text-blue-900 truncate max-w-[200px]">
@@ -66,7 +82,7 @@ export default function LearningMode({ topic, onClose }) {
         </button>
       </div>
 
-      {/* Progress Bar Visual */}
+      {/* Progress Bar */}
       <div className="w-full bg-gray-200 h-1.5">
         <div 
           className="bg-green-500 h-1.5 transition-all duration-300" 
@@ -74,7 +90,7 @@ export default function LearningMode({ topic, onClose }) {
         />
       </div>
 
-      {/* 2. MAIN CONTENT (Scrollable Page) */}
+      {/* 2. MAIN CONTENT */}
       <div className="flex-1 overflow-y-auto p-6 flex flex-col items-center">
         <div className="max-w-md w-full space-y-6">
           {currentPage.title && (
@@ -88,7 +104,7 @@ export default function LearningMode({ topic, onClose }) {
         </div>
       </div>
 
-      {/* 3. FOOTER CONTROLS */}
+      {/* 3. FOOTER */}
       <div className="p-4 border-t bg-gray-50 flex items-center justify-between gap-4">
         <button 
           onClick={handlePrev}
@@ -111,7 +127,8 @@ export default function LearningMode({ topic, onClose }) {
           onClick={handleNext}
           className="p-3 rounded-xl font-bold flex-1 bg-blue-600 text-white shadow-md active:bg-blue-700"
         >
-          {pageIndex === totalPages - 1 ? 'Finish ✅' : 'Next ➡️'}
+          {/* LOGIC CHANGE: Check if it's the last page */}
+          {pageIndex === totalPages - 1 ? 'Start Quiz 📝' : 'Next ➡️'}
         </button>
       </div>
     </div>
