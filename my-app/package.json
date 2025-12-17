@@ -21,6 +21,7 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-i18next": "^16.5.0",
+    "react-router-dom": "^7.10.1",
     "vosk-browser": "^0.0.8"
   },
   "devDependencies": {

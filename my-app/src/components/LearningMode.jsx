@@ -1,136 +1,126 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useVoiceInput } from '../hooks/useVoiceInput';
 import { useTextToSpeech } from '../hooks/useTextToSpeech';
-import { updateProgress } from '../utils/db'; 
-import QuizMode from './QuizMode'; // <--- NEW IMPORT
 
 export default function LearningMode({ topic, onClose }) {
   const { t, i18n } = useTranslation();
-  const { speak, stop, isSpeaking } = useTextToSpeech();
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [showQuiz, setShowQuiz] = useState(false);
   
-  const [pageIndex, setPageIndex] = useState(0);
-  const [mode, setMode] = useState('reading'); // 'reading' or 'quiz'
+  // Voice & TTS Hooks
+  const { text: voiceText, isListening, startListening, stopListening, resetText } = useVoiceInput();
+  const { speak, stop: stopSpeaking, isSpeaking } = useTextToSpeech();
 
-  // Normalize data
-  const pages = topic?.pages || [{ title: topic?.topic, content: topic?.detail }];
-  const totalPages = pages.length;
-  const currentPage = pages[pageIndex];
-
+  // Reset when topic changes
   useEffect(() => {
-    // Only update progress if we are READING. 
-    // Quiz updates completion separately.
-    if (topic?.id && mode === 'reading') {
-      updateProgress(topic.id, pageIndex, totalPages);
-    }
-    stop(); 
-  }, [pageIndex, topic, mode]);
+    setCurrentSlide(0);
+    setShowQuiz(false);
+    stopSpeaking();
+  }, [topic]);
 
-  // --- RENDER QUIZ MODE IF ACTIVE ---
-  if (mode === 'quiz') {
-    return (
-      <div className="fixed inset-0 bg-white z-50 animate-in slide-in-from-right">
-        {/* Pass onClose as onFinish so it closes the modal when quiz is done */}
-        <QuizMode topic={topic} onFinish={onClose} />
-      </div>
-    );
-  }
+  if (!topic) return null;
 
-  // --- EXISTING READING LOGIC ---
+  const slides = topic.pages || [];
+  const activeSlide = slides[currentSlide];
+  const isLastSlide = currentSlide === slides.length - 1;
+
   const handleNext = () => {
-    if (pageIndex < totalPages - 1) {
-      setPageIndex(prev => prev + 1);
+    if (isLastSlide) {
+      setShowQuiz(true);
     } else {
-      // If quiz exists, go to quiz. Else finish.
-      if (topic.quiz && topic.quiz.length > 0) {
-        setMode('quiz');
-      } else {
-        onClose();
-      }
+      setCurrentSlide(curr => curr + 1);
     }
   };
 
   const handlePrev = () => {
-    if (pageIndex > 0) setPageIndex(prev => prev - 1);
+    if (currentSlide > 0) setCurrentSlide(curr => curr - 1);
   };
-
-  const handleSpeak = () => {
-    if (isSpeaking) {
-      stop();
-    } else {
-      const textToRead = `${currentPage.title}. ${currentPage.content}`;
-      speak(textToRead, i18n.language);
-    }
-  };
-
-  if (!topic) return null;
 
   return (
-    <div className="fixed inset-0 bg-white z-50 flex flex-col animate-in slide-in-from-bottom duration-300">
+    // 1. Z-INDEX FIX: z-[100] ensures it sits ON TOP of the Bottom Nav (z-50)
+    <div className="fixed inset-0 z-[100] bg-gray-900/95 backdrop-blur-sm flex flex-col animate-in slide-in-from-bottom-5 duration-300">
       
-      {/* 1. HEADER */}
-      <div className="flex items-center justify-between p-4 border-b bg-gray-50">
-        <div className="flex flex-col">
-          <h2 className="font-bold text-lg text-blue-900 truncate max-w-[200px]">
-            {topic.topic}
-          </h2>
-          <span className="text-xs text-gray-500">
-            Page {pageIndex + 1} of {totalPages}
-          </span>
+      {/* --- HEADER --- */}
+      <div className="bg-white p-4 flex items-center justify-between shadow-md shrink-0">
+        <div>
+          <h2 className="font-bold text-lg text-gray-800 line-clamp-1">{topic.topic}</h2>
+          <p className="text-xs text-blue-600 font-medium">
+             {showQuiz ? "Quiz Mode" : `Page ${currentSlide + 1} of ${slides.length}`}
+          </p>
         </div>
-        <button onClick={() => { stop(); onClose(); }} className="p-2 bg-gray-200 rounded-full hover:bg-gray-300">
+        <button 
+          onClick={onClose} 
+          className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-red-100 text-gray-500 hover:text-red-600 transition"
+        >
           ✕
         </button>
       </div>
 
-      {/* Progress Bar */}
-      <div className="w-full bg-gray-200 h-1.5">
-        <div 
-          className="bg-green-500 h-1.5 transition-all duration-300" 
-          style={{ width: `${((pageIndex + 1) / totalPages) * 100}%` }}
-        />
-      </div>
+      {/* --- SCROLLABLE CONTENT AREA --- */}
+      {/* 2. PADDING FIX: pb-32 ensures content isn't hidden behind the buttons */}
+      <div className="flex-1 overflow-y-auto p-5 pb-40 space-y-6">
+        
+        {!showQuiz ? (
+          // LEARNING SLIDES
+          <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 min-h-[50vh]">
+            <div className="flex justify-between items-start mb-4">
+              <h3 className="text-2xl font-black text-gray-800">{activeSlide?.title}</h3>
+              <button 
+                onClick={() => isSpeaking ? stopSpeaking() : speak(activeSlide?.content)}
+                className={`p-3 rounded-full transition-all ${isSpeaking ? 'bg-red-100 text-red-600 animate-pulse' : 'bg-blue-50 text-blue-600'}`}
+              >
+                {isSpeaking ? '🔊 Stop' : '🔈 Read'}
+              </button>
+            </div>
+            
+            {/* Image (Placeholder if needed) */}
+            <div className="w-full h-40 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl mb-6 flex items-center justify-center opacity-80">
+               <span className="text-6xl">📖</span>
+            </div>
 
-      {/* 2. MAIN CONTENT */}
-      <div className="flex-1 overflow-y-auto p-6 flex flex-col items-center">
-        <div className="max-w-md w-full space-y-6">
-          {currentPage.title && (
-            <h3 className="text-2xl font-bold text-blue-800 text-center mb-4">
-              {currentPage.title}
-            </h3>
-          )}
-          <div className="text-lg text-gray-700 leading-loose bg-white p-2">
-            {currentPage.content}
+            <p className="text-lg text-gray-700 leading-relaxed font-medium">
+              {activeSlide?.content}
+            </p>
           </div>
-        </div>
+        ) : (
+          // QUIZ MODE PLACEHOLDER
+          <div className="bg-white rounded-3xl p-8 text-center shadow-sm min-h-[50vh] flex flex-col justify-center items-center">
+            <span className="text-6xl mb-4">🎯</span>
+            <h3 className="text-2xl font-bold text-gray-800 mb-2">Quiz Time!</h3>
+            <p className="text-gray-500">Test your knowledge on {topic.topic}.</p>
+          </div>
+        )}
+
       </div>
 
-      {/* 3. FOOTER */}
-      <div className="p-4 border-t bg-gray-50 flex items-center justify-between gap-4">
+      {/* --- FOOTER (ACTION BUTTONS) --- */}
+      {/* 3. VISIBILITY FIX: White background + Safe Area Padding */}
+      <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 pb-8 flex items-center justify-between gap-4 shadow-[0_-4px_20px_rgba(0,0,0,0.1)]">
+        
+        {/* PREV BUTTON */}
         <button 
-          onClick={handlePrev}
-          disabled={pageIndex === 0}
-          className={`p-3 rounded-xl font-bold flex-1 border-2 
-            ${pageIndex === 0 ? 'border-gray-200 text-gray-300' : 'border-blue-100 text-blue-600'}`}
+          onClick={handlePrev} 
+          disabled={currentSlide === 0 || showQuiz}
+          className="flex-1 py-3 rounded-xl font-bold text-gray-600 bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-gray-200 transition"
         >
           ⬅️ Prev
         </button>
 
-        <button 
-          onClick={handleSpeak}
-          className={`p-4 rounded-full shadow-lg transition-all
-            ${isSpeaking ? 'bg-red-100 text-red-600 animate-pulse border-2 border-red-500' : 'bg-blue-600 text-white'}`}
-        >
-          {isSpeaking ? '⏹️' : '🔊'}
-        </button>
+        {/* MIC BUTTON (Center) */}
+        
 
+        {/* NEXT / QUIZ BUTTON */}
         <button 
           onClick={handleNext}
-          className="p-3 rounded-xl font-bold flex-1 bg-blue-600 text-white shadow-md active:bg-blue-700"
+          className={`flex-1 py-3 rounded-xl font-bold text-white shadow-md transition-transform active:scale-95
+            ${showQuiz ? 'bg-green-500 hover:bg-green-600' : 'bg-blue-600 hover:bg-blue-700'}
+          `}
         >
-          {/* LOGIC CHANGE: Check if it's the last page */}
-          {pageIndex === totalPages - 1 ? 'Start Quiz 📝' : 'Next ➡️'}
+          {showQuiz ? "Start Quiz 🚀" : (isLastSlide ? "Take Quiz 📝" : "Next ➡️")}
         </button>
       </div>
+
     </div>
   );
 }
