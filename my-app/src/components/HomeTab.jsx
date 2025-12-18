@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useOfflineSearch } from '../hooks/useOfflineSearch';
-import { useVoiceInput } from '../hooks/useVoiceInput';
+import { useNativeVoice } from '../hooks/useNativeVoice';
 import LearningMode from './LearningMode'; // <--- CHANGED THIS IMPORT
 import { addToHistory, getHistory } from '../utils/db';
 
@@ -18,7 +18,7 @@ export default function HomeTab() {
     startListening, 
     stopListening,
     resetText
-  } = useVoiceInput();
+  } = useNativeVoice();
 
   useEffect(() => {
     if (voiceText) {

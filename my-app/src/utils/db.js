@@ -1,19 +1,19 @@
 import { openDB } from 'idb';
 
 const DB_NAME = 'tutor-lms-db';
-const V = 3; // Version bumped to 3 for schema changes
+const V = 3; // Version 3
 
 export const initDB = async () => {
   return openDB(DB_NAME, V, {
     upgrade(db) {
       if (!db.objectStoreNames.contains('history')) {
-        db.createObjectStore('history', { keyPath: 'uniqueId' }); // Changed key
+        db.createObjectStore('history', { keyPath: 'uniqueId' });
       }
       if (!db.objectStoreNames.contains('user')) {
         db.createObjectStore('user', { keyPath: 'id' });
       }
       if (!db.objectStoreNames.contains('progress')) {
-        db.createObjectStore('progress', { keyPath: 'uniqueId' }); // Changed key
+        db.createObjectStore('progress', { keyPath: 'uniqueId' });
       }
     },
   });
@@ -23,27 +23,36 @@ export const initDB = async () => {
 const getCurrentUserId = async () => {
   const db = await initDB();
   const users = await db.getAll('user');
-  return users.length > 0 ? users[0].id : null;
+  // Filter out the special teacher data store if it exists
+  const activeUser = users.find(u => u.id !== 'teacher_data_store');
+  return activeUser ? activeUser.id : null;
 };
 
 // --- USER FUNCTIONS ---
 export const saveUser = async (user) => {
   const db = await initDB();
-  await db.clear('user'); // Ensure only 1 active user at a time
+  // We don't want to clear 'teacher_data_store', so we just put the user
+  // If you want to force single user, ensure you delete old user entries specifically
+  // But for now, put is safe.
   return db.put('user', user);
 };
 
 export const getUser = async () => {
   const db = await initDB();
   const users = await db.getAll('user');
-  return users.length > 0 ? users[0] : null;
+  // Return the first user that isn't the teacher data blob
+  const user = users.find(u => u.id !== 'teacher_data_store');
+  return user || null;
 };
 
 export const logoutUser = async () => {
   const db = await initDB();
-  return db.clear('user'); 
-  // NOTE: We do NOT clear progress/history here. 
-  // It stays saved safely for when they login again.
+  // Only delete the active user, preserve teacher data if needed
+  const user = await getUser();
+  if (user) {
+    await db.delete('user', user.id);
+  }
+  return;
 };
 
 // --- HISTORY FUNCTIONS (User Specific) ---
@@ -52,7 +61,6 @@ export const addToHistory = async (topic) => {
   if (!userId) return;
 
   const db = await initDB();
-  // Create a composite ID: "STD-101_sci_7_1"
   const uniqueId = `${userId}_${topic.id}`;
 
   return db.put('history', {
@@ -72,7 +80,6 @@ export const getHistory = async () => {
 
   const db = await initDB();
   const allHistory = await db.getAll('history');
-  // FILTER: Only return history for THIS user
   return allHistory.filter(h => h.studentId === userId);
 };
 
@@ -111,7 +118,6 @@ export const getAllProgress = async () => {
 
   const db = await initDB();
   const allProgress = await db.getAll('progress');
-  // FILTER: Only return progress for THIS user
   return allProgress.filter(p => p.studentId === userId);
 };
 
@@ -122,7 +128,6 @@ export const getSyncPayload = async () => {
   const db = await initDB();
   const user = await getUser();
   
-  // Get RAW data and filter manually
   const allProgress = await db.getAll('progress');
   const userProgress = allProgress.filter(p => p.studentId === userId);
 
@@ -134,7 +139,6 @@ export const getSyncPayload = async () => {
     student_name: user.name,
     grade: user.grade,
     last_sync: new Date().toISOString(),
-    // Simplify for the teacher dashboard
     completed_topics: userProgress.filter(p => p.isComplete).map(p => p.topicId),
     learning_history: userHistory.map(h => ({ topic: h.topic, time: h.timestamp })),
     raw_progress: userProgress
@@ -144,8 +148,6 @@ export const getSyncPayload = async () => {
 // --- TEACHER DASHBOARD FUNCTIONS ---
 export const saveTeacherData = async (studentsList) => {
   const db = await initDB();
-  // We use a simple key-value pair in the 'user' store for now, 
-  // or ideally create a new store. But let's reuse 'user' store with a special ID to keep it simple.
   return db.put('user', { id: 'teacher_data_store', data: studentsList });
 };
 
@@ -153,4 +155,33 @@ export const getTeacherData = async () => {
   const db = await initDB();
   const record = await db.get('user', 'teacher_data_store');
   return record ? record.data : [];
+};
+
+// --- 🔥 FIXED: MARK TOPIC AS COMPLETED (Uses IDB now) ---
+export const markTopicAsCompleted = async (topicId) => {
+  // 1. Get User from IDB
+  const user = await getUser();
+  if (!user) return;
+
+  const currentProgress = user.progress || [];
+
+  // 2. Update if not already completed
+  if (!currentProgress.includes(topicId)) {
+    const newProgressList = [...currentProgress, topicId];
+    
+    const updatedUser = {
+      ...user,
+      progress: newProgressList
+    };
+    
+    // 3. Save back to IDB (IMPORTANT: This fixes the sync issue)
+    await saveUser(updatedUser);
+    
+    // 4. Dispatch Event for UI
+    const event = new CustomEvent('progress-updated', { detail: newProgressList });
+    window.dispatchEvent(event);
+    
+    console.log(`✅ Level ${topicId} saved to IDB. Progress:`, newProgressList);
+    return updatedUser;
+  }
 };

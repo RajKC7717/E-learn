@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { saveUser } from '../utils/db';
+import { saveUser } from '../utils/db'; // 1. Import the DB function
 
 export default function LoginScreen({ onLogin }) {
   const [isTeacher, setIsTeacher] = useState(false);
@@ -13,31 +13,44 @@ export default function LoginScreen({ onLogin }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+  // --- HANDLER: STUDENT LOGIN ---
   const handleStudentLogin = async (e) => {
     e.preventDefault();
     if (!name.trim() || !studentId.trim()) return;
 
+    // Create User Object
     const user = { 
       id: studentId.trim().toUpperCase(), 
-      name, 
+      name: name.trim(), 
       grade,
-      role: 'student' // <--- Tag as Student
+      role: 'student',
+      progress: [] // Initialize empty progress for new users (DB handles merge if exists)
     };
     
-    await saveUser(user);
-    onLogin(user);
+    try {
+      // 2. Save to Database (IndexedDB)
+      await saveUser(user);
+      
+      // 3. Update App State to unlock the UI
+      onLogin(user);
+    } catch (err) {
+      console.error("Login failed:", err);
+      alert("Failed to save login data. Please try again.");
+    }
   };
 
+  // --- HANDLER: TEACHER LOGIN ---
   const handleTeacherLogin = async (e) => {
     e.preventDefault();
     if (password === 'admin123') { // Simple Password for Demo
       const user = { 
         id: 'TEACHER', 
         name: 'Teacher', 
-        role: 'teacher' // <--- Tag as Teacher
+        role: 'teacher' 
       };
-      // We don't save teacher to DB usually to avoid persistent login on shared devices, 
-      // but for this demo, we can just pass it up.
+      
+      // We generally don't save the teacher to the local student DB
+      // just pass them straight to the App state.
       onLogin(user);
     } else {
       setError("❌ Wrong Password");

@@ -1,46 +1,74 @@
 import { useState, useEffect } from 'react';
-import Fuse from 'fuse.js';
-import { useTranslation } from 'react-i18next'; // Import hook
 
 export function useOfflineSearch() {
-  const { i18n } = useTranslation(); // Get current language
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
-  const [database, setDatabase] = useState([]);
+  const [allData, setAllData] = useState([]);
   const [isReady, setIsReady] = useState(false);
 
-  // 1. Load the correct JSON when language changes
+  // 1. Load Data (Online First -> Fallback to Offline Cache)
   useEffect(() => {
-    setIsReady(false);
-    
-    // Determine file based on language (default to 'en')
-    const lang = i18n.language.startsWith('hi') ? 'hi' : 'en';
-    const fileName = `/data/knowledge_${lang}.json`;
-
-    fetch(fileName)
-      .then(res => res.json())
-      .then(data => {
-        setDatabase(data);
+    async function loadData() {
+      try {
+        // A. Try fetching fresh data
+        const response = await fetch('/data/knowledge_en.json');
+        if (!response.ok) throw new Error("Network error");
+        
+        const data = await response.json();
+        
+        // 🔥 SAVE to LocalStorage (Cache it!)
+        localStorage.setItem('offline_content', JSON.stringify(data));
+        
+        setAllData(data);
         setIsReady(true);
-      })
-      .catch(err => console.error(`Failed to load ${fileName}:`, err));
-  }, [i18n.language]); // Re-run when language changes
+        console.log("✅ Search Index Loaded (Online)");
 
-  // 2. Setup Fuse (same as before)
-  const fuseOptions = {
-    keys: ['topic', 'keywords'],
-    threshold: 0.4,
-  };
+      } catch (err) {
+        // B. If Offline, Load from Backup
+        console.warn("⚠️ Search going Offline. Loading cache...");
+        const cached = localStorage.getItem('offline_content');
+        
+        if (cached) {
+          setAllData(JSON.parse(cached));
+          setIsReady(true);
+          console.log("📂 Search Index Loaded (Offline Cache)");
+        } else {
+          console.error("❌ No offline data available for search.");
+        }
+      }
+    }
 
+    loadData();
+  }, []);
+
+  // 2. Perform Search whenever Query changes
   useEffect(() => {
-    if (!query || !isReady) {
+    if (query.trim() === '') {
       setResults([]);
       return;
     }
-    const fuse = new Fuse(database, fuseOptions);
-    const searchResults = fuse.search(query);
-    setResults(searchResults.map(result => result.item));
-  }, [query, database, isReady]);
+
+    if (!allData.length) return;
+
+    const lowerQuery = query.toLowerCase();
+
+    // Search Logic: Check Topic, Keywords, or Summary
+    const filtered = allData.filter(item => {
+      // Safety checks in case fields are missing
+      const topic = (item.topic || '').toLowerCase();
+      const summary = (item.summary || '').toLowerCase();
+      const keywords = (item.keywords || []).map(k => k.toLowerCase());
+
+      return (
+        topic.includes(lowerQuery) || 
+        summary.includes(lowerQuery) || 
+        keywords.some(k => k.includes(lowerQuery))
+      );
+    });
+
+    setResults(filtered);
+
+  }, [query, allData]);
 
   return { query, setQuery, results, isReady };
 }

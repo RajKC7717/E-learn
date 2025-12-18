@@ -11,7 +11,29 @@
       { "title": "Transparent and Opaque", "content": "Transparent objects allow light to pass through them completely (like glass). Opaque objects do not allow light to pass (like wood or metal). Translucent objects allow some light to pass (like butter paper)." },
       { "title": "Formation of Shadows", "content": "A shadow is formed when an opaque object blocks light. The size of the shadow depends on the distance between the object, light source, and screen. Shadow is always formed on the opposite side of the light source." },
       { "title": "Reflection of Light", "content": "When light falls on a smooth shiny surface like a mirror, it bounces back. This is called reflection. The angle at which light hits the surface equals the angle at which it reflects." }
+    ],"quiz": [
+  {
+    "type": "mcq",
+    "question": "What happens when light falls on a smooth shiny surface?",
+    "options": ["It gets absorbed", "It reflects back", "It passes through", "It disappears"],
+    "answer": "It reflects back"
+  },
+  {
+    "type": "mcq",
+    "question": "Which type of object allows light to pass through completely?",
+    "options": ["Opaque", "Transparent", "Translucent", "Reflective"],
+    "answer": "Transparent"
+  },
+  {
+    "type": "match",
+    "question": "Match the material with its property",
+    "pairs": [
+      { "left": "Glass", "right": "Transparent" },
+      { "left": "Wood", "right": "Opaque" },
+      { "left": "Butter Paper", "right": "Translucent" }
     ]
+  }
+]
   },
   {
     "id": "sci_6_2",
@@ -25,7 +47,29 @@
       { "title": "Properties of Air", "content": "Air occupies space and has weight. We can prove air occupies space by inverting an empty glass in water - water does not fill it completely. Air exerts pressure in all directions." },
       { "title": "Oxygen and Life", "content": "All living beings need oxygen to breathe and survive. Plants give out oxygen during photosynthesis in the presence of sunlight. Animals and humans breathe in oxygen and breathe out carbon dioxide." },
       { "title": "Atmosphere Layers", "content": "The layer of air surrounding Earth is called the atmosphere. It protects us from harmful sun rays and maintains temperature. It has different layers: Troposphere (weather occurs here), Stratosphere (contains ozone layer), and others." }
+    ],
+    "quiz": [
+  {
+    "type": "mcq",
+    "question": "What percentage of nitrogen is present in air?",
+    "options": ["21%", "78%", "1%", "50%"],
+    "answer": "78%"
+  },
+  {
+    "type": "mcq",
+    "question": "Which gas do plants give out during photosynthesis?",
+    "options": ["Carbon dioxide", "Nitrogen", "Oxygen", "Hydrogen"],
+    "answer": "Oxygen"
+  },
+  {
+    "type": "match",
+    "question": "Match the atmospheric layer with its feature",
+    "pairs": [
+      { "left": "Troposphere", "right": "Weather occurs here" },
+      { "left": "Stratosphere", "right": "Contains ozone layer" }
     ]
+  }
+]
   },
   {
     "id": "sci_6_3",

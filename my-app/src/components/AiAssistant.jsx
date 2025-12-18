@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useAiEngine } from '../hooks/useAiEngine';
-import { useVoiceInput } from '../hooks/useVoiceInput';
+import { useNativeVoice } from '../hooks/useNativeVoice';
 import VoiceGuideModal from './VoiceGuideModal'; // <--- Import Modal
 
 export default function AiAssistant() {
@@ -8,7 +8,7 @@ export default function AiAssistant() {
   const { status, downloadProgress, loadingText, messages, isGenerating, initEngine, sendMessage } = useAiEngine();
   
   // Voice Hook
-  const { isListening, text: voiceText, startListening, stopListening, error, clearError } = useVoiceInput();
+  const { isListening, text: voiceText, startListening, stopListening, error, clearError } = useNativeVoice();
 
   const messagesEndRef = useRef(null);
   const [input, setInput] = useState("");
