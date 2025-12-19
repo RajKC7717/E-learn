@@ -1,5 +1,10 @@
-import GameMapBuilder from '../../components/GameMapBuilder';
+import ComputerTowerBuilder from '../../components/ComputerTowerBuilder'; // Adjust path if needed
 
 export default function ComputerMap() {
-  return <GameMapBuilder subject="Computer" themeColor="orange" title="Cyber City 💻" />;
+  return (
+    <ComputerTowerBuilder 
+      subject="Computer" 
+      title="CYBER TOWER" 
+    />
+  );
 }

@@ -1,6 +1,10 @@
-import GameMapBuilder from '../../components/GameMapBuilder';
+import MathGraphBuilder from '../../components/MathGraphBuilder'; // Adjust path if needed
 
 export default function MathMap() {
-  // Note: Ensure your JSON has subject: "Maths" or "Math" (case insensitive handled by builder)
-  return <GameMapBuilder subject="Math" themeColor="indigo" title="Math Kingdom 📐" />;
+  return (
+    <MathGraphBuilder 
+      subject="Math" 
+      title="VECTOR SPACE" 
+    />
+  );
 }
