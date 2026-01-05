@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { saveUser } from '../utils/db'; // 1. Import the DB function
+import { saveUser } from '../utils/db'; 
+import { useLanguage } from '../context/LanguageContext'; // <--- Import Context
 
 export default function LoginScreen({ onLogin }) {
+  const { t } = useLanguage(); // <--- Get Translation Function
   const [isTeacher, setIsTeacher] = useState(false);
   
   // Student State
@@ -18,20 +20,16 @@ export default function LoginScreen({ onLogin }) {
     e.preventDefault();
     if (!name.trim() || !studentId.trim()) return;
 
-    // Create User Object
     const user = { 
       id: studentId.trim().toUpperCase(), 
       name: name.trim(), 
       grade,
       role: 'student',
-      progress: [] // Initialize empty progress for new users (DB handles merge if exists)
+      progress: [] 
     };
     
     try {
-      // 2. Save to Database (IndexedDB)
       await saveUser(user);
-      
-      // 3. Update App State to unlock the UI
       onLogin(user);
     } catch (err) {
       console.error("Login failed:", err);
@@ -42,15 +40,12 @@ export default function LoginScreen({ onLogin }) {
   // --- HANDLER: TEACHER LOGIN ---
   const handleTeacherLogin = async (e) => {
     e.preventDefault();
-    if (password === 'admin123') { // Simple Password for Demo
+    if (password === 'admin123') { 
       const user = { 
         id: 'TEACHER', 
         name: 'Teacher', 
         role: 'teacher' 
       };
-      
-      // We generally don't save the teacher to the local student DB
-      // just pass them straight to the App state.
       onLogin(user);
     } else {
       setError("❌ Wrong Password");
@@ -64,7 +59,7 @@ export default function LoginScreen({ onLogin }) {
         <div className="text-center mb-8">
           <span className="text-6xl">{isTeacher ? '👨‍🏫' : '🎓'}</span>
           <h1 className="text-3xl font-extrabold text-blue-900 mt-4">
-            {isTeacher ? 'Teacher Panel' : 'Student Login'}
+            {isTeacher ? t.teacherLogin : t.welcome}
           </h1>
           <p className="text-gray-500 mt-2">
             {isTeacher ? 'Enter admin password to access.' : 'Enter your ID to track progress.'}
@@ -75,7 +70,7 @@ export default function LoginScreen({ onLogin }) {
         {!isTeacher && (
           <form onSubmit={handleStudentLogin} className="space-y-6">
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Student ID</label>
+              <label className="block text-sm font-bold text-gray-700 mb-2">{t.enterId}</label>
               <input 
                 type="text" required
                 className="w-full p-4 rounded-xl border-2 border-blue-100 focus:border-blue-500 outline-none transition font-mono text-lg uppercase"
@@ -84,7 +79,7 @@ export default function LoginScreen({ onLogin }) {
               />
             </div>
             <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Full Name</label>
+              <label className="block text-sm font-bold text-gray-700 mb-2">{t.enterName}</label>
               <input 
                 type="text" required
                 className="w-full p-4 rounded-xl border-2 border-blue-100 focus:border-blue-500 outline-none transition font-bold text-lg"
@@ -104,7 +99,7 @@ export default function LoginScreen({ onLogin }) {
               </select>
             </div>
             <button type="submit" className="w-full bg-blue-600 text-white font-bold py-4 rounded-xl shadow-lg hover:bg-blue-700 active:scale-95 transition">
-              Start Learning 🚀
+              {t.loginBtn} 🚀
             </button>
           </form>
         )}
@@ -134,7 +129,7 @@ export default function LoginScreen({ onLogin }) {
             onClick={() => { setIsTeacher(!isTeacher); setError(''); }}
             className="text-gray-400 text-sm hover:text-blue-600 underline transition"
           >
-            {isTeacher ? '← Back to Student Login' : 'Teacher Login'}
+            {isTeacher ? '← Back to Student Login' : t.teacherLogin}
           </button>
         </div>
 

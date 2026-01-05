@@ -1,5 +1,10 @@
-import GameMapBuilder from '../../components/GameMapBuilder';
+import VillageMapBuilder from '../../components/VillageMapBuilder'; // Ensure path is correct
 
 export default function ScienceMap() {
-  return <GameMapBuilder subject="Science" themeColor="emerald" title="Science Lab 🧪" />;
+  return (
+    <VillageMapBuilder 
+      subject="Science" 
+      title="Discovery Village" 
+    />
+  );
 }

@@ -1,4 +1,5 @@
 import { openDB } from 'idb';
+import { supabase } from './supabase';
 
 const DB_NAME = 'tutor-lms-db';
 const V = 3; // Version 3
@@ -183,5 +184,42 @@ export const markTopicAsCompleted = async (topicId) => {
     
     console.log(`✅ Level ${topicId} saved to IDB. Progress:`, newProgressList);
     return updatedUser;
+  }
+};
+export const syncProgressToCloud = async () => {
+  if (!navigator.onLine) {
+    console.log("📴 Offline. Skipping sync.");
+    return { success: false, message: "Offline" };
+  }
+
+  const user = await getUser();
+  if (!user || !user.id || user.id === 'TEACHER') return; // Don't sync teachers or guests
+
+  try {
+    console.log("☁️ Syncing to Supabase...");
+
+    // 1. Prepare Data
+    const payload = {
+      id: user.id,                // Matches your schema (text)
+      name: user.name,            // Matches your schema (text)
+      grade: user.grade,          // Matches your schema (text)
+      completed_count: (user.progress || []).length, // Matches (int4)
+      last_sync: new Date().toISOString(), // Matches (timestamptz)
+      raw_data: user // Matches (jsonb) - We save EVERYTHING here as backup
+    };
+
+    // 2. Send to Supabase (Upsert = Insert or Update)
+    const { error } = await supabase
+      .from('student_progress')
+      .upsert(payload, { onConflict: 'id' });
+
+    if (error) throw error;
+
+    console.log("✅ Sync Successful!");
+    return { success: true, time: new Date() };
+
+  } catch (err) {
+    console.error("❌ Sync Failed:", err.message);
+    return { success: false, message: err.message };
   }
 };
