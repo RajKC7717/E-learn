@@ -7,12 +7,18 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'], // Helper to include static assets
+      
+      // 1. UPDATE: Add 'evosolve.apk' here so it is recognized as a static asset
+      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg', 'evosolve.apk'], 
+      
       workbox: {
-        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
-        // CRITICAL UPDATE: Add 'json' here so it caches your database!
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,json}'],
+        // 2. UPDATE: Increase cache limit to 50MB (Standard APKs are ~20-40MB)
+        maximumFileSizeToCacheInBytes: 50 * 1024 * 1024, 
+        
+        // 3. UPDATE: Add 'apk' to the list of file types to cache
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,json,apk}'],
       },
+      
       manifest: {
         name: 'Offline Tutor AI',
         short_name: 'TutorAI',

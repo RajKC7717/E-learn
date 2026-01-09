@@ -7,6 +7,7 @@ import { getUser } from './utils/db';
 import LanguageSelector from './components/onboarding/LanguageSelector';
 import GameLoader from './components/onboarding/GameLoader';
 import { LanguageProvider } from './context/LanguageContext';
+import BattleMode from './components/BattleMode';
 
 // --- PAGE IMPORTS ---
 import MapPage from './components/MapTab'; 
@@ -183,6 +184,7 @@ function AppContent() {
       <main className="max-w-md mx-auto relative min-h-[80vh]">
         <Routes>
             <Route path="/" element={<Navigate to="/map" replace />} />
+            <Route path="/battle" element={<BattleMode />} />
             <Route path="/map" element={<MapPage />} />
             <Route path="/map/math" element={<MathMap />} />
             <Route path="/map/science" element={<ScienceMap />} />

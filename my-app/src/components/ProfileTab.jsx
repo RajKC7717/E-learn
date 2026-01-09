@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getUser, getAllProgress, getSyncPayload, logoutUser } from '../utils/db';
-import { supabase } from '../utils/supabase'; // <--- Cloud Connection
+import { supabase } from '../utils/supabase'; 
+import { useFileShare } from '../hooks/useFileShare';
 import Toast from './Toast';
 
 export default function ProfileTab() {
@@ -12,56 +13,80 @@ export default function ProfileTab() {
   const [stats, setStats] = useState({ totalRead: 0, completed: 0, bySubject: {} });
   const [isSyncing, setIsSyncing] = useState(false);
   const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
+  const { shareApk, isSharing } = useFileShare();
 
-  // 1. Load Local Data
-  useEffect(() => {
-    async function loadData() {
-      const u = await getUser();
-      setUser(u);
+  // --- 1. DATA LOADING FUNCTION (Reusable) ---
+  const fetchProfileData = useCallback(async () => {
+    const u = await getUser();
+    setUser(u);
 
-      if (!u) return;
+    if (!u) return;
 
-      const progressData = await getAllProgress(); // Filtered by user in db.js
-      
-      // Load Topic Metadata to calculate percentages
-      const lang = i18n.language.startsWith('hi') ? 'hi' : 'en';
+    const progressData = await getAllProgress(); 
+    
+    // Load Topic Metadata
+    const lang = i18n.language.startsWith('hi') ? 'hi' : 'en';
+    let allTopics = [];
+    try {
       const response = await fetch(`/data/knowledge_${lang}.json`);
-      const allTopics = await response.json();
-
-      // Calculate Stats
-      const subjectCounts = {}; 
-      allTopics.forEach(topic => {
-        const sub = topic.subject;
-        if (!subjectCounts[sub]) subjectCounts[sub] = { total: 0, read: 0, completed: 0 };
-        subjectCounts[sub].total++;
-      });
-
-      let totalCompleted = 0;
-      progressData.forEach(p => {
-        const topicInfo = allTopics.find(t => t.id === p.topicId);
-        if (topicInfo) {
-          const sub = topicInfo.subject;
-          if (subjectCounts[sub]) {
-            subjectCounts[sub].read++;
-            if (p.isComplete) {
-               subjectCounts[sub].completed++;
-               totalCompleted++;
-            }
-          }
-        }
-      });
-
-      setStats({
-        totalRead: progressData.length,
-        completed: totalCompleted,
-        bySubject: subjectCounts
-      });
+      allTopics = await response.json();
+    } catch (e) {
+      console.error("Error loading topics", e);
     }
 
-    loadData();
+    // Calculate Stats
+    const subjectCounts = {}; 
+    allTopics.forEach(topic => {
+      const sub = topic.subject;
+      if (!subjectCounts[sub]) subjectCounts[sub] = { total: 0, read: 0, completed: 0 };
+      subjectCounts[sub].total++;
+    });
+
+    let totalCompleted = 0;
+    progressData.forEach(p => {
+      const topicInfo = allTopics.find(t => t.id === p.topicId);
+      if (topicInfo) {
+        const sub = topicInfo.subject;
+        if (subjectCounts[sub]) {
+          subjectCounts[sub].read++;
+          if (p.isComplete) {
+             subjectCounts[sub].completed++;
+             totalCompleted++;
+          }
+        }
+      }
+    });
+
+    setStats({
+      totalRead: progressData.length,
+      completed: totalCompleted,
+      bySubject: subjectCounts
+    });
   }, [i18n.language]);
 
-  // 2. Sync Logic (Upload to Supabase)
+  // --- 2. INITIAL LOAD & LISTENERS ---
+  useEffect(() => {
+    // A. Load immediately
+    fetchProfileData();
+
+    // B. Listen for "progress-updated" event (Triggered when finishing a level)
+    const handleUpdate = () => {
+      console.log("♻️ Profile detected progress change. Updating...");
+      fetchProfileData();
+    };
+
+    window.addEventListener('progress-updated', handleUpdate);
+    
+    // C. Update when user clicks back to this tab (Focus)
+    window.addEventListener('focus', handleUpdate);
+
+    return () => {
+      window.removeEventListener('progress-updated', handleUpdate);
+      window.removeEventListener('focus', handleUpdate);
+    };
+  }, [fetchProfileData]);
+
+  // --- 3. SYNC LOGIC ---
   const handleSync = async () => {
     if (!navigator.onLine) {
       setToast({ show: true, message: "⚠️ Connect to Internet to Sync", type: "error" });
@@ -74,7 +99,6 @@ export default function ProfileTab() {
       
       if (!payload) throw new Error("No data to sync");
 
-      // Upload/Update in Supabase
       const { error } = await supabase
         .from('student_progress')
         .upsert({ 
@@ -173,6 +197,29 @@ export default function ProfileTab() {
             );
           })}
         </div>
+      </div>
+      {/* 3. ADD THIS SHARE BUTTON SECTION */}
+      <div className="bg-white p-4 rounded-2xl shadow-sm border border-indigo-100">
+        <h3 className="font-bold text-gray-800 mb-2">Share Offline App</h3>
+        <p className="text-xs text-gray-500 mb-4">
+          Send the app file to friends via Bluetooth so they can learn without internet.
+        </p>
+        
+        <button 
+          onClick={shareApk}
+          disabled={isSharing}
+          className={`w-full py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition
+            ${isSharing ? 'bg-gray-100 text-gray-400' : 'bg-indigo-600 text-white shadow-lg active:scale-95'}
+          `}
+        >
+          {isSharing ? (
+            <span>📦 Preparing File...</span>
+          ) : (
+            <>
+              <span className="text-xl">📡</span> Share via Bluetooth
+            </>
+          )}
+        </button>
       </div>
 
       {/* Logout */}
